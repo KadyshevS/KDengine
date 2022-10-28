@@ -1,6 +1,7 @@
 #pragma once
 #include "KDWin.h"
 #include "KDException.h"
+#include "Keyboard.h"
 
 class Window
 {
@@ -17,6 +18,8 @@ public:
 		HRESULT GetErrorCode() const noexcept;
 		std::string GetErrorString() const noexcept;
 	};
+	
+	Keyboard kbd;
 
 private:
 //	Window params
