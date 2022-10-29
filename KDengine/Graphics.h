@@ -24,6 +24,7 @@ public:
 
 	void EndFrame();
 	void ClearBuffer(float r, float g, float b) noexcept;
+	void DrawTestTriangle();
 
 	~Graphics() = default;
 
@@ -46,6 +47,16 @@ public:
 		std::string GetErrorString() const noexcept;
 		std::string GetErrorDescription() const noexcept;
 		std::string GetErrorInfo() const noexcept;
+	};
+	class InfoException : public Exception
+	{
+		std::string info;
+
+	public:
+		InfoException( int line, const char* file, std::vector<std::string> infoMsgs );
+		const char* what() const noexcept override;
+		const char* GetType() const noexcept override;
+		std::string GetInfo() const noexcept;
 	};
 	class DeviceRemovedException : public HrException
 	{
