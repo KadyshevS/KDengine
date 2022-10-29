@@ -3,7 +3,9 @@
 #include "KDException.h"
 #include "Keyboard.h"
 #include "Mouse.h"
+#include "Graphics.h"
 #include <optional>
+#include <memory>
 
 class Window
 {
@@ -29,6 +31,7 @@ private:
 	int width;
 	int height;
 	HWND hWnd;
+	std::unique_ptr<Graphics> gfx;
 
 //	Register & cleanup window class
 	class WindowClass
@@ -61,7 +64,8 @@ public:
 
 	void SetTitle( const char* title );
 	void SetTitle( const std::string& title );
-	
+
+	Graphics& Gfx();
 	static std::optional<int> ProcessMessages();
 
 	~Window();

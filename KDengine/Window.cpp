@@ -21,7 +21,7 @@ Window::WindowClass::WindowClass() noexcept
 	wc.lpszMenuName = nullptr;
 	wc.lpszClassName = wndClassName;
 	wc.hIconSm = static_cast<HICON>( LoadImage( hInst, MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 32, 32, 0 ) );
-
+	
 	RegisterClassEx(&wc);
 }
 
@@ -72,6 +72,9 @@ Window::Window(const int Width, const int Height, const char* Name)
 
 //	Show window
 	ShowWindow( hWnd, SW_SHOWDEFAULT );
+
+//	Make Graphics ptr
+	gfx = std::make_unique<Graphics>( hWnd );
 }
 
 LRESULT WINAPI Window::HandleMsgSetup(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
@@ -211,6 +214,10 @@ void Window::SetTitle(const std::string& title)
 	}
 }
 
+Graphics& Window::Gfx()
+{
+	return *gfx;
+}
 std::optional<int> Window::ProcessMessages()
 {
 	MSG msg;

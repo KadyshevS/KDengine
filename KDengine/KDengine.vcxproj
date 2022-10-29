@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
+    <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="KDException.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
@@ -157,6 +158,7 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="FrameTimer.h" />
+    <ClInclude Include="Graphics.h" />
     <ClInclude Include="KDException.h" />
     <ClInclude Include="KDWin.h" />
     <ClInclude Include="Keyboard.h" />
