@@ -2,6 +2,7 @@
 #include "KDWin.h"
 #include "KDException.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 class Window
 {
@@ -20,6 +21,7 @@ public:
 	};
 	
 	Keyboard kbd;
+	Mouse mouse;
 
 private:
 //	Window params
@@ -50,10 +52,14 @@ private:
 	static LRESULT CALLBACK HandleMsgThunk( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam ) noexcept;
 	LRESULT HandleMsg( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam ) noexcept;
 
+
 public:
 	Window( const int Width, const int Height, const char* Name );
 	Window( const Window& ) = delete;
 	Window& operator = ( const Window& ) = delete;
+
+	void SetTitle( const char* title );
+	void SetTitle( const std::string& title );
 
 	~Window();
 };

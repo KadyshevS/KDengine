@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="KDException.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowsMessageMap.cpp" />
     <ClCompile Include="MainWindow.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="KDException.h" />
     <ClInclude Include="KDWin.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowsMessageMap.h" />
