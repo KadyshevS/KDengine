@@ -1,21 +1,9 @@
 #include "Graphics.h"
 #include "DxErr.h"
+#include "GfxExcept.h"
 #include <sstream>
 
 #pragma comment(lib, "d3d11.lib")
-
-#define GFX_EXCEPT_NOINFO(hr) Graphics::HrException( __LINE__,__FILE__,(hr) )
-#define GFX_THROW_NOINFO(hrcall) if( FAILED( hr = (hrcall) ) ) throw Graphics::HrException( __LINE__,__FILE__,hr )
-
-#ifndef NDEBUG
-#define GFX_EXCEPT(hr) Graphics::HrException( __LINE__,__FILE__,(hr),infoManager.GetMessages() )
-#define GFX_THROW_INFO(hrcall) infoManager.Set(); if( FAILED( hr = (hrcall) ) ) throw GFX_EXCEPT(hr)
-#define GFX_DEVICE_REMOVED_EXCEPT(hr) Graphics::DeviceRemovedException( __LINE__,__FILE__,(hr),infoManager.GetMessages() )
-#else
-#define GFX_EXCEPT(hr) Graphics::HrException( __LINE__,__FILE__,(hr) )
-#define GFX_THROW_INFO(hrcall) GFX_THROW_NOINFO(hrcall)
-#define GFX_DEVICE_REMOVED_EXCEPT(hr) Graphics::DeviceRemovedException( __LINE__,__FILE__,(hr) )
-#endif
 
 Graphics::Graphics(HWND hWnd)
 {
@@ -56,9 +44,9 @@ Graphics::Graphics(HWND hWnd)
 	) );
 
 //	Present back buffer
-	ID3D11Resource* pBackBuffer = nullptr;
-	GFX_THROW_INFO( pSwap->GetBuffer( 0, __uuidof(ID3D11Resource), reinterpret_cast<void**>(&pBackBuffer) ) );
-	GFX_THROW_INFO( pDevice->CreateRenderTargetView( pBackBuffer, nullptr, &pTarget ) );
+	wrl::ComPtr<ID3D11Resource> pBackBuffer;
+	GFX_THROW_INFO( pSwap->GetBuffer( 0, __uuidof(ID3D11Resource), &pBackBuffer ) );
+	GFX_THROW_INFO( pDevice->CreateRenderTargetView( pBackBuffer.Get(), nullptr, &pTarget ) );
 }
 
 void Graphics::EndFrame()
@@ -80,25 +68,10 @@ void Graphics::EndFrame()
 		}
 	}
 }
-
-Graphics::~Graphics()
+void Graphics::ClearBuffer(float r, float g, float b) noexcept
 {
-	if ( pDevice != nullptr )
-	{
-		pDevice->Release();
-	}
-	if ( pSwap != nullptr )
-	{
-		pSwap->Release();
-	}
-	if ( pContext != nullptr )
-	{
-		pContext->Release();
-	}
-	if (pTarget != nullptr)
-	{
-		pTarget->Release();
-	}
+	const float color[4] = { r, g, b, 1.0f };
+	pContext->ClearRenderTargetView(pTarget.Get(), color);
 }
 
 //	Graphics Exception

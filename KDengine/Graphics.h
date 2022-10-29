@@ -3,16 +3,19 @@
 #include "KDException.h"
 #include "DxgiInfoManager.h"
 #include <d3d11.h>
+#include <wrl.h>
+
+namespace wrl = Microsoft::WRL;
 
 class Graphics
 {
 #ifndef NDEBUG
 	DxgiInfoManager infoManager;
 #endif 
-	ID3D11Device* pDevice = nullptr;
-	IDXGISwapChain* pSwap = nullptr;
-	ID3D11DeviceContext* pContext = nullptr;
-	ID3D11RenderTargetView* pTarget = nullptr;
+	wrl::ComPtr<ID3D11Device> pDevice;
+	wrl::ComPtr<IDXGISwapChain> pSwap;
+	wrl::ComPtr<ID3D11DeviceContext> pContext;
+	wrl::ComPtr<ID3D11RenderTargetView> pTarget;
 
 public:
 	Graphics( HWND hWnd );
@@ -20,13 +23,9 @@ public:
 	Graphics& operator = ( const Graphics& ) = delete;
 
 	void EndFrame();
-	void ClearBuffer(float r, float g, float b ) noexcept
-	{
-		const float color[4] = { r, g, b, 1.0f };
-		pContext->ClearRenderTargetView( pTarget, color );
-	}
+	void ClearBuffer(float r, float g, float b) noexcept;
 
-	~Graphics();
+	~Graphics() = default;
 
 public:
 //	Graphics Exception
