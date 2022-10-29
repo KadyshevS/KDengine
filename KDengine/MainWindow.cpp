@@ -1,5 +1,5 @@
 #include "Window.h"
-#include <sstream>
+#include "App.h"
 
 int CALLBACK WinMain(
 	HINSTANCE hInst,
@@ -10,29 +10,7 @@ int CALLBACK WinMain(
 {
 	try
 	{
-		Window wnd(800, 600, "DirectX Test");
-
-		MSG msg;
-		BOOL gResult;
-
-		while ( gResult = GetMessage(&msg, nullptr, 0, 0) > 0 )
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-
-			while ( !wnd.mouse.IsEmpty() )
-			{
-				const auto e = wnd.mouse.Read();
-				if ( e.GetType() == Mouse::Event::Type::Move )
-				{
-					std::ostringstream oss;
-					oss << "(" << wnd.mouse.GetPosX() << "; " << wnd.mouse.GetPosY() << ")";
-					wnd.SetTitle( oss.str() );
-				}
-			}
-		}
-
-		return msg.wParam;
+		return App{}.Go();
 	}
 	catch ( const KDException& e )
 	{

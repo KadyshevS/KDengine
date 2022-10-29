@@ -3,6 +3,7 @@
 #include "KDException.h"
 #include "Keyboard.h"
 #include "Mouse.h"
+#include <optional>
 
 class Window
 {
@@ -60,6 +61,8 @@ public:
 
 	void SetTitle( const char* title );
 	void SetTitle( const std::string& title );
+	
+	static std::optional<int> ProcessMessages();
 
 	~Window();
 };
