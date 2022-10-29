@@ -12,7 +12,10 @@ class Window
 public:
 	class Exception : public KDException
 	{
+		using KDException::KDException;
+
 		HRESULT hr;
+
 	public:
 		Exception( int line, const char* file, HRESULT hr ) noexcept;
 
@@ -20,7 +23,14 @@ public:
 		virtual const char* GetType() const noexcept override;
 		static std::string TranslateErrorCode(HRESULT hr) noexcept;
 		HRESULT GetErrorCode() const noexcept;
-		std::string GetErrorString() const noexcept;
+		std::string GetErrorDescription() const noexcept;
+	};
+	class NoGfxException : public Exception
+	{
+		using Exception::Exception;
+
+	public:
+		const char* GetType() const noexcept override;
 	};
 	
 	Keyboard kbd;
@@ -73,3 +83,4 @@ public:
 
 #define KDWND_EXCEPT( hr ) Window::Exception( __LINE__, __FILE__, hr )
 #define KDWND_LAST_EXCEPT() Window::Exception( __LINE__, __FILE__, GetLastError() )
+#define KDWND_NOGFX_EXCEPT() Window::NoGfxException( __LINE__, __FILE__ )

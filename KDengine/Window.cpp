@@ -216,6 +216,10 @@ void Window::SetTitle(const std::string& title)
 
 Graphics& Window::Gfx()
 {
+	if ( !gfx )
+	{
+		throw KDWND_NOGFX_EXCEPT();
+	}
 	return *gfx;
 }
 std::optional<int> Window::ProcessMessages()
@@ -253,7 +257,7 @@ const char* Window::Exception::what() const noexcept
 	std::ostringstream oss;
 	oss << GetType() << std::endl
 		<< "[Error Code] " << GetErrorCode() << std::endl
-		<< "[Descrition] " << GetErrorString() << std::endl
+		<< "[Descrition] " << GetErrorDescription() << std::endl
 		<< GetOriginString();
 
 	whatBuffer = oss.str();
@@ -285,7 +289,12 @@ HRESULT Window::Exception::GetErrorCode() const noexcept
 {
 	return hr;
 }
-std::string Window::Exception::GetErrorString() const noexcept
+std::string Window::Exception::GetErrorDescription() const noexcept
 {
 	return TranslateErrorCode( hr );
+}
+
+const char* Window::NoGfxException::GetType() const noexcept
+{
+	return "";
 }
