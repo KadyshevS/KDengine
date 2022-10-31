@@ -16,6 +16,7 @@ class Graphics
 	wrl::ComPtr<IDXGISwapChain> pSwap;
 	wrl::ComPtr<ID3D11DeviceContext> pContext;
 	wrl::ComPtr<ID3D11RenderTargetView> pTarget;
+	wrl::ComPtr<ID3D11DepthStencilView> pDSV;
 
 public:
 	Graphics( HWND hWnd );
@@ -23,8 +24,8 @@ public:
 	Graphics& operator = ( const Graphics& ) = delete;
 
 	void EndFrame();
-	void ClearBuffer(float r, float g, float b) noexcept;
-	void DrawTestTriangle();
+	void ClearBuffer( float r, float g, float b ) noexcept;
+	void DrawTestCube( float angle, float x, float z );
 
 	~Graphics() = default;
 

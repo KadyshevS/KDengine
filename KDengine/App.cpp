@@ -7,22 +7,19 @@ App::App()
 	wnd(800, 600, "KDEngine App")
 {}
 
-int App::Go()
+void App::Update()
 {
-	while ( true )
-	{
-		if ( const auto ecode = Window::ProcessMessages() )
-		{
-			return *ecode;
-		}
-		ComposeFrame();
-	}
 }
 
 void App::ComposeFrame()
 {
-	const float c = std::sinf( timer.Peek() )  / 2.0f + 0.5f;
-	wnd.Gfx().ClearBuffer( c, c, 1.0f );
-	wnd.Gfx().DrawTestTriangle();
-	wnd.Gfx().EndFrame();
+	wnd.Gfx().DrawTestCube(
+		-timer.Peek(),
+		0.0f, 0.0f
+	);
+	wnd.Gfx().DrawTestCube(
+		timer.Peek(), 
+		wnd.mouse.GetPosX() / 400.0f - 1.0f, 
+		-wnd.mouse.GetPosY() / 300.f + 1.0f  
+	);
 }

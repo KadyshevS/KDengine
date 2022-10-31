@@ -9,8 +9,23 @@ class App
 
 public:
 	App();
-	int Go();
+	int Go()
+	{
+		while (true)
+		{
+			if (const auto ecode = Window::ProcessMessages())
+			{
+				return *ecode;
+			}
+			Update();
+
+			wnd.Gfx().ClearBuffer(0.0f, 0.0f, 0.0f);
+			ComposeFrame();
+			wnd.Gfx().EndFrame();
+		}
+	}
 
 private:
+	void Update();
 	void ComposeFrame();
 };
