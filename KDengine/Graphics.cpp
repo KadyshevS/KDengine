@@ -1,12 +1,8 @@
 #include "Graphics.h"
 #include "DxErr.h"
 #include "GfxExcept.h"
-#include <sstream>
-#include <d3dcompiler.h>
 #include <DirectXMath.h>
-
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "D3DCompiler.lib")
+#include <sstream>
 
 namespace wrl = Microsoft::WRL;
 namespace dx = DirectX;
@@ -127,187 +123,17 @@ void Graphics::ClearBuffer(float r, float g, float b) noexcept
 	pContext->ClearRenderTargetView( pTarget.Get(), color );
 	pContext->ClearDepthStencilView( pDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u );
 }
-
-void Graphics::DrawTestCube(float angle, float x, float z)
+void Graphics::DrawIndexed( UINT count ) noexcept
 {
-	HRESULT hr;
-
-	struct Vertex
-	{
-		struct
-		{
-			float x;
-			float y;
-			float z;
-		} pos;
-	};
-
-	//	Create a vertex buffer for triangle
-	const Vertex verts[] =
-	{
-		{ -1.0f, -1.0f, -1.0f },
-		{  1.0f, -1.0f, -1.0f },
-		{ -1.0f,  1.0f, -1.0f },
-		{  1.0f,  1.0f, -1.0f },
-		{ -1.0f, -1.0f,  1.0f },
-		{  1.0f, -1.0f,  1.0f },
-		{ -1.0f,  1.0f,  1.0f },
-		{  1.0f,  1.0f,  1.0f },
-	};
-
-	wrl::ComPtr<ID3D11Buffer> pVertexBuffer;
-	D3D11_BUFFER_DESC bd = {};
-	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.CPUAccessFlags = 0u;
-	bd.MiscFlags = 0u;
-	bd.ByteWidth = sizeof(verts);
-	bd.StructureByteStride = sizeof(Vertex);
-
-	D3D11_SUBRESOURCE_DATA sd = {};
-	sd.pSysMem = verts;
-	GFX_THROW_INFO(pDevice->CreateBuffer(&bd, &sd, &pVertexBuffer));
-
-	//	Bind a vertex buffer to pipeline
-	UINT stride = sizeof(Vertex);
-	UINT offset = 0u;
-	pContext->IASetVertexBuffers(0u, 1u, pVertexBuffer.GetAddressOf(), &stride, &offset);
-
-	//	Create index buffer
-	const unsigned short indicies[] =
-	{
-		0, 2, 1,	2, 3, 1,
-		1, 3, 5,	3, 7, 5,
-		2, 6, 3,	3, 6, 7,
-		4, 5, 7,	4, 7, 6,
-		0, 4, 2,	2, 4, 6,
-		0, 1, 4,	1, 5, 4,
-	};
-
-	wrl::ComPtr<ID3D11Buffer> pIndexBuffer;
-	D3D11_BUFFER_DESC ibd = { 0 };
-	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	ibd.Usage = D3D11_USAGE_DEFAULT;
-	ibd.CPUAccessFlags = 0u;
-	ibd.MiscFlags = 0u;
-	ibd.ByteWidth = sizeof(indicies);
-	ibd.StructureByteStride = sizeof(unsigned short);
-
-	D3D11_SUBRESOURCE_DATA isd = {};
-	isd.pSysMem = indicies;
-	GFX_THROW_INFO(pDevice->CreateBuffer(&ibd, &isd, &pIndexBuffer));
-
-//	Bind index buffer
-	pContext->IASetIndexBuffer(pIndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0u);
-
-//	Create constant buffer
-	struct ConstantBuffer
-	{
-		dx::XMMATRIX transform;
-	};
-	const ConstantBuffer cb =
-	{
-		{
-			dx::XMMatrixTranspose(
-				dx::XMMatrixRotationZ( angle ) *
-				dx::XMMatrixRotationX( angle ) *
-				dx::XMMatrixTranslation( x, 0.0f, z + 4.0f ) *
-				dx::XMMatrixPerspectiveLH( 1.0f, 3.0f / 4.0f, 0.5f, 10.f )
-			)
-		}
-	};
-	wrl::ComPtr<ID3D11Buffer> pConstantBuffer;
-	D3D11_BUFFER_DESC cbd = { 0 };
-	cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cbd.Usage = D3D11_USAGE_DYNAMIC;
-	cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	cbd.MiscFlags = 0u;
-	cbd.ByteWidth = sizeof( cb );
-	cbd.StructureByteStride = 0u;
-
-	D3D11_SUBRESOURCE_DATA csd = {};
-	csd.pSysMem = &cb;
-	GFX_THROW_INFO( pDevice->CreateBuffer( &cbd, &csd, &pConstantBuffer ) );
-
-//	Bind constant buffer
-	pContext->VSSetConstantBuffers( 0u, 1u, pConstantBuffer.GetAddressOf() );
-
-//	Create constant buffer
-	struct ConstantBuffer2
-	{
-		struct
-		{
-			float r;
-			float g;
-			float b;
-			float a;
-		} face_colors[6];
-	};
-	const ConstantBuffer2 cb2 =
-	{
-		{
-			{ 1.0f, 0.0f, 0.0f },
-			{ 0.0f, 1.0f, 0.0f },
-			{ 0.0f, 0.0f, 1.0f },
-			{ 1.0f, 1.0f, 0.0f },
-			{ 0.0f, 1.0f, 1.0f },
-			{ 1.0f, 1.0f, 1.0f },
-		}
-	};
-	wrl::ComPtr<ID3D11Buffer> pConstantBuffer2;
-	D3D11_BUFFER_DESC cbd2;
-	cbd2.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cbd2.Usage = D3D11_USAGE_DEFAULT;
-	cbd2.CPUAccessFlags = 0u;
-	cbd2.MiscFlags = 0u;
-	cbd2.ByteWidth = sizeof( cb2 );
-	cbd2.StructureByteStride = 0u;
-
-	D3D11_SUBRESOURCE_DATA csd2 = {};
-	csd2.pSysMem = &cb2;
-	GFX_THROW_INFO( pDevice->CreateBuffer( &cbd2, &csd2, &pConstantBuffer2 ) );
-
-//	Bind constant buffer
-	pContext->PSSetConstantBuffers( 0u, 1u, pConstantBuffer2.GetAddressOf() );
-
-//	Create pixel shader
-	wrl::ComPtr<ID3D11PixelShader> pPixelShader;
-	wrl::ComPtr<ID3DBlob> pBlob;
-	GFX_THROW_INFO( D3DReadFileToBlob( L"PixelShader.cso", &pBlob ) );
-	GFX_THROW_INFO( pDevice->CreatePixelShader( pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &pPixelShader ) );
-
-//	Bind pixel shader
-	pContext->PSSetShader( pPixelShader.Get(), nullptr, 0u );
-
-//	Create vertex shader
-	wrl::ComPtr<ID3D11VertexShader> pVertexShader;
-	GFX_THROW_INFO( D3DReadFileToBlob( L"VertexShader.cso", &pBlob ) );
-	GFX_THROW_INFO( pDevice->CreateVertexShader( pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &pVertexShader ) );
-
-//	Bind vertex shader
-	pContext->VSSetShader( pVertexShader.Get(), nullptr, 0u );
-
-//	Input (vertex) layout
-	wrl::ComPtr<ID3D11InputLayout> pInputLayout;
-	const D3D11_INPUT_ELEMENT_DESC ied[] =
-	{
-		{ "Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-	};
-	GFX_THROW_INFO( pDevice->CreateInputLayout(
-		ied, (UINT)std::size(ied),
-		pBlob->GetBufferPointer(),
-		pBlob->GetBufferSize(),
-		&pInputLayout
-	) );
-
-//	Bind vertex layout
-	pContext->IASetInputLayout( pInputLayout.Get() );
-
-//	Set primitive topology
-	pContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
-	
-//	Draw indexed triangles
-	GFX_THROW_INFO_ONLY( pContext->DrawIndexed( (UINT)std::size(indicies), 0u, 0u ) );
+	GFX_THROW_INFO_ONLY( pContext->DrawIndexed( count, 0u, 0u ) );
+}
+void Graphics::SetProjection(DirectX::FXMMATRIX proj) noexcept
+{
+	projection = proj;
+}
+DirectX::XMMATRIX Graphics::GetProjection() const noexcept
+{
+	return projection;
 }
 
 //	Graphics Exception

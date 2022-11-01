@@ -1,7 +1,6 @@
 #pragma once
 #include "Window.h"
 #include "FrameTimer.h"
-
 class App
 {
 	Window wnd;

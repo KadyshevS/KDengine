@@ -2,21 +2,28 @@
 #include "KDWin.h"
 #include "KDException.h"
 #include "DxgiInfoManager.h"
+#include <d3dcompiler.h>
+#include <DirectXMath.h>
 #include <d3d11.h>
 #include <wrl.h>
 
-namespace wrl = Microsoft::WRL;
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "D3DCompiler.lib")
 
 class Graphics
 {
+	friend class Bindable;
+
+	DirectX::XMMATRIX projection;
+
 #ifndef NDEBUG
 	DxgiInfoManager infoManager;
 #endif 
-	wrl::ComPtr<ID3D11Device> pDevice;
-	wrl::ComPtr<IDXGISwapChain> pSwap;
-	wrl::ComPtr<ID3D11DeviceContext> pContext;
-	wrl::ComPtr<ID3D11RenderTargetView> pTarget;
-	wrl::ComPtr<ID3D11DepthStencilView> pDSV;
+	Microsoft::WRL::ComPtr<ID3D11Device> pDevice;
+	Microsoft::WRL::ComPtr<IDXGISwapChain> pSwap;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget;
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDSV;
 
 public:
 	Graphics( HWND hWnd );
@@ -25,7 +32,9 @@ public:
 
 	void EndFrame();
 	void ClearBuffer( float r, float g, float b ) noexcept;
-	void DrawTestCube( float angle, float x, float z );
+	void DrawIndexed( UINT count ) noexcept;
+	void SetProjection( DirectX::FXMMATRIX proj ) noexcept;
+	DirectX::XMMATRIX GetProjection() const noexcept;
 
 	~Graphics() = default;
 
