@@ -30,6 +30,7 @@ public:
 			wnd.Gfx().EndFrame();
 		}
 	}
+	~App() = default;
 
 private:
 	void Update();
