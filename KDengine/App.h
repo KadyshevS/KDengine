@@ -1,10 +1,17 @@
 #pragma once
 #include "Window.h"
 #include "FrameTimer.h"
+#include "Box.h"
+
 class App
 {
 	Window wnd;
 	FrameTimer timer;
+
+	std::vector<std::unique_ptr<class Box>> boxes;
+	static constexpr size_t boxCount = 80;
+
+	float dt;
 
 public:
 	App();

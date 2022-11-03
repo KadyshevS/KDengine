@@ -40,7 +40,7 @@ Box::Box(Graphics& gfx,
 		{ -1.0f,  1.0f,  1.0f },
 		{  1.0f,  1.0f,  1.0f },
 	};
-	AddBind(std::make_unique<VertexBuffer>(gfx, vertices));
+	AddBind( std::make_unique<VertexBuffer>( gfx, vertices ) );
 
 	auto pvs = std::make_unique<VertexShader>( gfx, L"VertexShader.cso" );
 	auto pvsbc = pvs->GetBytecode();
