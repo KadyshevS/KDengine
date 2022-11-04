@@ -32,7 +32,7 @@ public:
 
 	void EndFrame();
 	void ClearBuffer( float r, float g, float b ) noexcept;
-	void DrawIndexed( UINT count ) noexcept;
+	void DrawIndexed( UINT count ) noexcept(!IS_DEBUG);
 	void SetProjection( DirectX::FXMMATRIX proj ) noexcept;
 	DirectX::XMMATRIX GetProjection() const noexcept;
 

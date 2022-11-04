@@ -31,6 +31,9 @@
     <Filter Include="Файлы заголовков\Drawable">
       <UniqueIdentifier>{e0a99bb2-87b0-47f5-8d8d-cf17a3185345}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Models">
+      <UniqueIdentifier>{abf8c731-7435-4f57-bfa7-6bcec0adcd68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowsMessageMap.cpp">
@@ -178,6 +181,27 @@
     </ClInclude>
     <ClInclude Include="DrawableBase.h">
       <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="KDMath.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexedTriangleList.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Файлы заголовков\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Prism.h">
+      <Filter>Файлы заголовков\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Файлы заголовков\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Файлы заголовков\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Cone.h">
+      <Filter>Файлы заголовков\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

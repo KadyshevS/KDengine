@@ -123,7 +123,7 @@ void Graphics::ClearBuffer(float r, float g, float b) noexcept
 	pContext->ClearRenderTargetView( pTarget.Get(), color );
 	pContext->ClearDepthStencilView( pDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u );
 }
-void Graphics::DrawIndexed( UINT count ) noexcept
+void Graphics::DrawIndexed( UINT count ) noexcept(!IS_DEBUG)
 {
 	GFX_THROW_INFO_ONLY( pContext->DrawIndexed( count, 0u, 0u ) );
 }
