@@ -17,13 +17,13 @@ class BoxChkTex : public DrawableBase<BoxChkTex>
 	float yaw = 0.0f;
 
 //	Position Speed
-	const float posXv	= 10.0f;
-	const float posYv	= 10.0f;
-	const float posZv	= 10.0f;
+	float posXv	= 10.0f;
+	float posYv	= 10.0f;
+	float posZv	= 10.0f;
 //	Rotation Speed		
-	const float rollv	= 5.0f;
-	const float pitchv	= 5.0f;
-	const float yawv	= 5.0f;
+	float rollv	= 5.0f;
+	float pitchv	= 5.0f;
+	float yawv	= 5.0f;
 
 public:
 	struct Vertex
@@ -35,6 +35,9 @@ public:
 			float v;
 		} tex;
 	};
+
+	void SetRotationV( const float vel );
+	void SetMoveV( const float vel );
 
 	BoxChkTex( Graphics& gfx, IndexedTriangleList<BoxChkTex::Vertex> obj, Keyboard& ctrl, const std::string& texPath );
 	

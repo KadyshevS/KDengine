@@ -4,6 +4,19 @@
 #include "Texture.h"
 #include "Surface.h"
 
+void BoxChkTex::SetRotationV(const float vel)
+{
+	rollv = vel;
+	yawv = vel;
+	pitchv = vel;
+}
+void BoxChkTex::SetMoveV(const float vel)
+{
+	posXv = vel;
+	posYv = vel;
+	posZv = vel;
+}
+
 BoxChkTex::BoxChkTex(Graphics& gfx, IndexedTriangleList<BoxChkTex::Vertex> obj, Keyboard& ctrl, const std::string& texPath)
 {
 	namespace dx = DirectX;
@@ -68,61 +81,9 @@ BoxChkTex::BoxChkTex(Graphics& gfx, IndexedTriangleList<BoxChkTex::Vertex> obj, 
 
 void BoxChkTex::Update( float dt ) noexcept
 {
-	if (kbd->KeyIsPressed(VK_LEFT))
-	{
-		posX -= posXv * dt;
-	}
-	if (kbd->KeyIsPressed(VK_RIGHT))
-	{
-		posX += posXv * dt;
-	}
-	if (kbd->KeyIsPressed(VK_UP))
-	{
-		posY += posYv * dt;
-	}
-	if (kbd->KeyIsPressed(VK_DOWN))
-	{
-		posY -= posYv * dt;
-	}
-	if (kbd->KeyIsPressed('Z'))
-	{
-		posZ += posZv * dt;
-	}
-	if (kbd->KeyIsPressed('X'))
-	{
-		posZ -= posZv * dt;
-	}
-
-	if ( kbd->KeyIsPressed('Q') )
-	{
-		roll += rollv * dt;
-		roll = wrap_angle( roll );
-	}
-	if ( kbd->KeyIsPressed('W') )
-	{
-		pitch += pitchv * dt;
-		pitch = wrap_angle( pitch );
-	}
-	if ( kbd->KeyIsPressed('E') )
-	{
-		yaw += yawv * dt;
-		yaw = wrap_angle( yaw );
-	}
-	if ( kbd->KeyIsPressed('A') )
-	{
-		roll -= rollv * dt;
-		roll = wrap_angle( roll );
-	}
-	if ( kbd->KeyIsPressed('S') )
-	{
-		pitch -= pitchv * dt;
-		pitch = wrap_angle( pitch );
-	}
-	if ( kbd->KeyIsPressed('D') )
-	{
-		yaw -= yawv * dt;
-		yaw = wrap_angle( yaw );
-	}
+	roll += wrap_angle(rollv * dt);
+	yaw += wrap_angle(yawv * dt);
+	pitch += wrap_angle(pitchv * dt);
 }
 DirectX::XMMATRIX BoxChkTex::GetTransformXM() const noexcept
 {

@@ -14,6 +14,7 @@ class App
 	FrameTimer timer;
 
 	float dt;
+	float speedF = 1.0f;
 	bool show_demo_window = true;
 
 	std::unique_ptr<Drawable> box;

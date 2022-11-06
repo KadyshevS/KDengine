@@ -17,14 +17,11 @@ App::App()
 
 void App::Update()
 {
-	dt = timer.Mark();
-	if (wnd.kbd.KeyIsPressed(VK_SPACE))
+	dt = timer.Mark() * speedF;
+
+	if ( wnd.kbd.KeyIsPressed(VK_SPACE) )
 	{
-		wnd.Gfx().DisableImgui();
-	}
-	else
-	{
-		wnd.Gfx().EnableImgui();
+		dt = 0.0f;
 	}
 
 	box->Update( dt );
@@ -33,4 +30,13 @@ void App::Update()
 void App::ComposeFrame()
 {
 	box->Draw( wnd.Gfx() );
+
+	static char buffer[1024];
+	if ( ImGui::Begin( "Simulation Speed" ) )
+	{
+		ImGui::SliderFloat( "Speed Factor", &speedF, 0.5f, 4.0f );
+		ImGui::Text( "Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate );
+		ImGui::InputText( "Sample Text", buffer, sizeof(buffer) );
+	}
+	ImGui::End();
 }
