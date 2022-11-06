@@ -6,7 +6,7 @@
 class Sphere
 {
 public:
-	template<class V>
+	template <class V>
 	static IndexedTriangleList<V> MakeTesselated(int latDiv, int longDiv)
 	{
 		namespace dx = DirectX;
@@ -91,7 +91,7 @@ public:
 
 		return { std::move(vertices),std::move(indices) };
 	}
-	template<class V>
+	template <class V>
 	static IndexedTriangleList<V> Make()
 	{
 		return MakeTesselated<V>(12, 24);

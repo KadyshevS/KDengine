@@ -1,17 +1,16 @@
 #pragma once
 #include "Window.h"
 #include "FrameTimer.h"
-#include "Box.h"
+#include "Drawable.h"
 
 class App
 {
 	Window wnd;
 	FrameTimer timer;
 
-	std::vector<std::unique_ptr<class Box>> boxes;
-	static constexpr size_t boxCount = 80;
-
 	float dt;
+
+	std::unique_ptr<Drawable> box;
 
 public:
 	App();
@@ -25,7 +24,7 @@ public:
 			}
 			Update();
 
-			wnd.Gfx().ClearBuffer(0.0f, 0.0f, 0.0f);
+			wnd.Gfx().ClearBuffer(0.0f, 0.0f, 0.3f);
 			ComposeFrame();
 			wnd.Gfx().EndFrame();
 		}

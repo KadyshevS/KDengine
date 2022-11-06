@@ -7,7 +7,7 @@
 class Plane
 {
 public:
-	template<class V>
+	template <class V>
 	static IndexedTriangleList<V> MakeTesselated(int divisions_x, int divisions_y)
 	{
 		namespace dx = DirectX;
@@ -66,7 +66,7 @@ public:
 
 		return{ std::move(vertices),std::move(indices) };
 	}
-	template<class V>
+	template <class V>
 	static IndexedTriangleList<V> Make()
 	{
 		return MakeTesselated<V>(1, 1);
