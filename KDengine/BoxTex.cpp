@@ -1,33 +1,35 @@
-#include "BoxChkTex.h"
+#include "BoxTex.h"
 #include "BindableBase.h"
-#include "KDMath.h"
+#include "GfxExcept.h"
 #include "Texture.h"
 #include "Surface.h"
 
-void BoxChkTex::SetRotationV(const float vel)
-{
-	rollv = vel;
-	yawv = vel;
-	pitchv = vel;
-}
-void BoxChkTex::SetMoveV(const float vel)
-{
-	posXv = vel;
-	posYv = vel;
-	posZv = vel;
-}
-
-BoxChkTex::BoxChkTex(Graphics& gfx, IndexedTriangleList<BoxChkTex::Vertex> obj, Keyboard& ctrl, const std::string& texPath)
+BoxTex::BoxTex(Graphics& gfx, std::mt19937& rng,
+	std::uniform_real_distribution<float>& adist,
+	std::uniform_real_distribution<float>& ddist,
+	std::uniform_real_distribution<float>& odist,
+	std::uniform_real_distribution<float>& rdist,
+	IndexedTriangleList<BoxTex::Vertex> obj)
+	:
+	r(rdist(rng)),
+	droll(ddist(rng)),
+	dpitch(ddist(rng)),
+	dyaw(ddist(rng)),
+	dphi(odist(rng)),
+	dtheta(odist(rng)),
+	dchi(odist(rng)),
+	chi(adist(rng)),
+	theta(adist(rng)),
+	phi(adist(rng))
 {
 	namespace dx = DirectX;
-	kbd = &ctrl;
 
-	if ( !IsStaticInitialized() )
+	if (!IsStaticInitialized())
 	{
 		auto model = obj;
 		model.Transform(dx::XMMatrixScaling(1.5f, 1.5f, 1.5f));
 
-		AddStaticBind(std::make_unique<Texture>(gfx, Surface::FromFile(texPath)));
+		AddStaticBind(std::make_unique<Texture>(gfx, Surface::FromFile("Images\\cube.png")));
 
 		AddStaticBind(std::make_unique<VertexBuffer>(gfx, model.vertices));
 
@@ -56,14 +58,19 @@ BoxChkTex::BoxChkTex(Graphics& gfx, IndexedTriangleList<BoxChkTex::Vertex> obj, 
 	AddBind(std::make_unique<TransformCbuf>(gfx, *this));
 }
 
-void BoxChkTex::Update( float dt ) noexcept
+void BoxTex::Update(float dt) noexcept
 {
-	roll += wrap_angle(rollv * dt);
-	yaw += wrap_angle(yawv * dt);
-	pitch += wrap_angle(pitchv * dt);
+	roll += droll * dt;
+	pitch += dpitch * dt;
+	yaw += dyaw * dt;
+	theta += dtheta * dt;
+	phi += dphi * dt;
+	chi += dchi * dt;
 }
-DirectX::XMMATRIX BoxChkTex::GetTransformXM() const noexcept
+
+DirectX::XMMATRIX BoxTex::GetTransformXM() const noexcept
 {
-	return DirectX::XMMatrixRotationRollPitchYaw( pitch, yaw, roll ) *
-		DirectX::XMMatrixTranslation(posX, posY, posZ+4.0f);
+	return DirectX::XMMatrixRotationRollPitchYaw(pitch, yaw, roll) *
+		DirectX::XMMatrixTranslation(r, 0.0f, 0.0f) *
+		DirectX::XMMatrixRotationRollPitchYaw(theta, phi, chi);
 }

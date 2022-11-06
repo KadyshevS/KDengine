@@ -3,6 +3,7 @@
 #include "FrameTimer.h"
 #include "Drawable.h"
 #include "ImguiManager.h"
+#include "Camera.h"
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
@@ -12,12 +13,15 @@ class App
 	ImguiManager imgui;
 	Window wnd;
 	FrameTimer timer;
+	Camera cam;
 
 	float dt;
 	float speedF = 1.0f;
 	bool show_demo_window = true;
 
-	std::unique_ptr<Drawable> box;
+	std::vector<std::unique_ptr<Drawable>> boxes;
+
+	static constexpr unsigned int boxCount = 80;
 
 public:
 	App();
