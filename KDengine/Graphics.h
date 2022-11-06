@@ -25,16 +25,23 @@ class Graphics
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget;
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDSV;
 
+	bool imguiEnabled = true;
+
 public:
 	Graphics( HWND hWnd );
 	Graphics( const Graphics& ) = delete;
 	Graphics& operator = ( const Graphics& ) = delete;
 
 	void EndFrame();
+	void BeginFrame( float r, float g, float b ) noexcept;
 	void ClearBuffer( float r, float g, float b ) noexcept;
 	void DrawIndexed( UINT count ) noexcept(!IS_DEBUG);
 	void SetProjection( DirectX::FXMMATRIX proj ) noexcept;
 	DirectX::XMMATRIX GetProjection() const noexcept;
+
+	void EnableImgui() noexcept;
+	void DisableImgui() noexcept;
+	bool IsImguiEnabled() const noexcept;
 
 	~Graphics() = default;
 

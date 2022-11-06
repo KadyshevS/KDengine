@@ -1,6 +1,8 @@
 #include "Graphics.h"
 #include "DxErr.h"
 #include "GfxExcept.h"
+#include "imgui_impl_dx11.h"
+#include "imgui_impl_win32.h"
 #include <DirectXMath.h>
 #include <sstream>
 
@@ -96,10 +98,20 @@ Graphics::Graphics(HWND hWnd)
 	vp.TopLeftX = 0;
 	vp.TopLeftY = 0;
 	pContext->RSSetViewports(1u, &vp);
+
+// Init Imgui Impl
+	ImGui_ImplDX11_Init( pDevice.Get(),pContext.Get() );
 }
 
 void Graphics::EndFrame()
 {
+// imgui frame end
+	if (imguiEnabled)
+	{
+		ImGui::Render();
+		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	}
+
 	HRESULT hr;
 #ifndef NDEBUG
 	infoManager.Set();
@@ -116,6 +128,20 @@ void Graphics::EndFrame()
 			throw GFX_EXCEPT( hr );
 		}
 	}
+}
+void Graphics::BeginFrame(float r, float g, float b) noexcept
+{
+	// imgui begin frame
+	if (imguiEnabled)
+	{
+		ImGui_ImplDX11_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+	}
+
+	const float color[] = { r, g, b, 1.0f };
+	pContext->ClearRenderTargetView(pTarget.Get(), color);
+	pContext->ClearDepthStencilView(pDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
 }
 void Graphics::ClearBuffer(float r, float g, float b) noexcept
 {
@@ -134,6 +160,19 @@ void Graphics::SetProjection(DirectX::FXMMATRIX proj) noexcept
 DirectX::XMMATRIX Graphics::GetProjection() const noexcept
 {
 	return projection;
+}
+
+void Graphics::EnableImgui() noexcept
+{
+	imguiEnabled = true;
+}
+void Graphics::DisableImgui() noexcept
+{
+	imguiEnabled = false;
+}
+bool Graphics::IsImguiEnabled() const noexcept
+{
+	return imguiEnabled;
 }
 
 //	Graphics Exception

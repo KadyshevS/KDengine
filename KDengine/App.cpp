@@ -1,16 +1,10 @@
 #include "App.h"
-#include "Cone.h"
 #include "Cube.h"
-#include "Plane.h"
-#include "Prism.h"
-#include "Sphere.h"
-#include "Surface.h"
 #include "GDIPlusManager.h"
-#include "Sheet.h"
 #include "BoxChkTex.h"
 #include <random>
 
-GDIPlusManager gdipm;
+GDIPlusManager gdipm; 
 
 App::App()
 	:
@@ -24,6 +18,14 @@ App::App()
 void App::Update()
 {
 	dt = timer.Mark();
+	if (wnd.kbd.KeyIsPressed(VK_SPACE))
+	{
+		wnd.Gfx().DisableImgui();
+	}
+	else
+	{
+		wnd.Gfx().EnableImgui();
+	}
 
 	box->Update( dt );
 }

@@ -2,6 +2,7 @@
 #include "WndExcept.h"
 #include "resource.h"
 #include <sstream>
+#include "imgui_impl_win32.h"
 
 //	Window Class
 Window::WindowClass Window::WindowClass::wndClass;
@@ -74,8 +75,17 @@ Window::Window(const int Width, const int Height, const char* Name)
 //	Show window
 	ShowWindow( hWnd, SW_SHOWDEFAULT );
 
+//	Init Imgui
+	ImGui_ImplWin32_Init( hWnd );
+
 //	Make Graphics ptr
 	gfx = std::make_unique<Graphics>( hWnd );
+}
+
+Window::~Window()
+{
+	ImGui_ImplWin32_Shutdown();
+	DestroyWindow(hWnd);
 }
 
 LRESULT WINAPI Window::HandleMsgSetup(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
@@ -100,6 +110,11 @@ LRESULT WINAPI Window::HandleMsgThunk(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 }
 LRESULT Window::HandleMsg(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
+	if ( ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam) )
+	{
+		return true;
+	}
+
 	switch (msg)
 	{
 	case WM_CLOSE:
@@ -239,11 +254,6 @@ std::optional<int> Window::ProcessMessages()
 	}
 
 	return {};
-}
-
-Window::~Window()
-{
-	DestroyWindow( hWnd );
 }
 
 //	Window Exception

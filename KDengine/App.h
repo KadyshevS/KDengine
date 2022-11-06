@@ -2,13 +2,19 @@
 #include "Window.h"
 #include "FrameTimer.h"
 #include "Drawable.h"
+#include "ImguiManager.h"
+#include "imgui.h"
+#include "imgui_impl_win32.h"
+#include "imgui_impl_dx11.h"
 
 class App
 {
+	ImguiManager imgui;
 	Window wnd;
 	FrameTimer timer;
 
 	float dt;
+	bool show_demo_window = true;
 
 	std::unique_ptr<Drawable> box;
 
@@ -24,8 +30,14 @@ public:
 			}
 			Update();
 
-			wnd.Gfx().ClearBuffer(0.0f, 0.0f, 0.3f);
+			wnd.Gfx().BeginFrame( 0.3f, 0.0f, 0.0f );
 			ComposeFrame();
+			// Imgui
+			static bool show_demo_window = true;
+			if (show_demo_window)
+			{
+				ImGui::ShowDemoWindow(&show_demo_window);
+			}
 			wnd.Gfx().EndFrame();
 		}
 	}
