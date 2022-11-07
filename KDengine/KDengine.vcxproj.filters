@@ -40,6 +40,9 @@
     <Filter Include="Исходные файлы\imgui">
       <UniqueIdentifier>{5fb61005-7ded-48d4-b535-9abc5bcfd5c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Models">
+      <UniqueIdentifier>{acd0d106-16ee-404a-847e-487b44ba897f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowsMessageMap.cpp">
@@ -105,14 +108,8 @@
     <ClCompile Include="Drawable.cpp">
       <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
-    <ClCompile Include="BoxBlend.cpp">
-      <Filter>Исходные файлы\Drawable</Filter>
-    </ClCompile>
     <ClCompile Include="Surface.cpp">
       <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxChk.cpp">
-      <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
     <ClCompile Include="GDIPlusManager.cpp">
       <Filter>Исходные файлы</Filter>
@@ -124,9 +121,6 @@
       <Filter>Исходные файлы\Bindable</Filter>
     </ClCompile>
     <ClCompile Include="Sheet.cpp">
-      <Filter>Исходные файлы\Drawable</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxChkTex.cpp">
       <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui_widgets.cpp">
@@ -155,6 +149,15 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxSolid.cpp">
+      <Filter>Исходные файлы\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidSphere.cpp">
+      <Filter>Исходные файлы\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Исходные файлы\Models</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,14 +263,8 @@
     <ClInclude Include="Cone.h">
       <Filter>Файлы заголовков\Models</Filter>
     </ClInclude>
-    <ClInclude Include="BoxBlend.h">
-      <Filter>Файлы заголовков\Drawable</Filter>
-    </ClInclude>
     <ClInclude Include="Surface.h">
       <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxChk.h">
-      <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="GDIPlusManager.h">
       <Filter>Файлы заголовков</Filter>
@@ -279,9 +276,6 @@
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
     <ClInclude Include="Sheet.h">
-      <Filter>Файлы заголовков\Drawable</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxChkTex.h">
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imconfig.h">
@@ -317,6 +311,15 @@
     <ClInclude Include="Camera.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="BoxSolid.h">
+      <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidSphere.h">
+      <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Файлы заголовков\Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KDengine.rc">
@@ -329,12 +332,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="ColorIndexPS.hlsl">
-      <Filter>Шейдеры</Filter>
-    </FxCompile>
-    <FxCompile Include="ColorIndexVS.hlsl">
-      <Filter>Шейдеры</Filter>
-    </FxCompile>
     <FxCompile Include="ColorBlendPS.hlsl">
       <Filter>Шейдеры</Filter>
     </FxCompile>
@@ -345,6 +342,18 @@
       <Filter>Шейдеры</Filter>
     </FxCompile>
     <FxCompile Include="TexturePS.hlsl">
+      <Filter>Шейдеры</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongVS.hlsl">
+      <Filter>Шейдеры</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongPS.hlsl">
+      <Filter>Шейдеры</Filter>
+    </FxCompile>
+    <FxCompile Include="SolidPS.hlsl">
+      <Filter>Шейдеры</Filter>
+    </FxCompile>
+    <FxCompile Include="SolidVS.hlsl">
       <Filter>Шейдеры</Filter>
     </FxCompile>
   </ItemGroup>

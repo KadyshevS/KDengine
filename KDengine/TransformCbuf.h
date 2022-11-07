@@ -5,7 +5,12 @@
 
 class TransformCbuf : public Bindable
 {
-	static std::unique_ptr<VertexConstantBuffer<DirectX::XMMATRIX>> pVcbuf;
+	struct Transforms
+	{
+		DirectX::XMMATRIX modelViewProj;
+		DirectX::XMMATRIX model;
+	};
+	static std::unique_ptr<VertexConstantBuffer<Transforms>> pVcbuf;
 	const Drawable& parent;
 
 public:

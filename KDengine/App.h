@@ -4,6 +4,7 @@
 #include "Drawable.h"
 #include "ImguiManager.h"
 #include "Camera.h"
+#include "PointLight.h"
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
@@ -14,6 +15,7 @@ class App
 	Window wnd;
 	FrameTimer timer;
 	Camera cam;
+	PointLight pl;
 
 	float dt;
 	float speedF = 1.0f;
@@ -21,7 +23,7 @@ class App
 
 	std::vector<std::unique_ptr<Drawable>> boxes;
 
-	static constexpr unsigned int boxCount = 80;
+	static constexpr unsigned int boxCount = 180;
 
 public:
 	App();
@@ -38,8 +40,8 @@ public:
 			wnd.Gfx().BeginFrame( 0.3f, 0.0f, 0.0f );
 			ComposeFrame();
 			// Imgui
-			static bool show_demo_window = true;
-			if (show_demo_window)
+			static bool show_demo_window = false;
+			if ( show_demo_window )
 			{
 				ImGui::ShowDemoWindow(&show_demo_window);
 			}

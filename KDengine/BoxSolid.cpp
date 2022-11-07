@@ -1,14 +1,15 @@
-#include "BoxBlend.h"
+#include "BoxSolid.h"
 #include "BindableBase.h"
 #include "GfxExcept.h"
 #include "Sphere.h"
 
-BoxBlend::BoxBlend(Graphics& gfx,
-	std::mt19937& rng,
+BoxSolid::BoxSolid(Graphics& gfx, std::mt19937& rng,
 	std::uniform_real_distribution<float>& adist,
 	std::uniform_real_distribution<float>& ddist,
 	std::uniform_real_distribution<float>& odist,
-	std::uniform_real_distribution<float>& rdist)
+	std::uniform_real_distribution<float>& rdist,
+	const IndexedTriangleList<BoxSolid::Vertex>& model,
+	const float red, const float green, const float blue)
 	:
 	r		(rdist(rng)),
 	droll	(ddist(rng)),
@@ -25,20 +26,16 @@ BoxBlend::BoxBlend(Graphics& gfx,
 
 	if (!IsStaticInitialized())
 	{
-		struct Vertex
-		{
-			dx::XMFLOAT3 pos;
-		};
 		auto model = Sphere::Make<Vertex>();
 		model.Transform(dx::XMMatrixScaling(1.5f, 1.5f, 1.5f));
 
 		AddStaticBind(std::make_unique<VertexBuffer>(gfx, model.vertices));
 
-		auto pvs = std::make_unique<VertexShader>(gfx, L"ColorBlendVS.cso");
+		auto pvs = std::make_unique<VertexShader>(gfx, L"SolidVS.cso");
 		auto pvsbc = pvs->GetBytecode();
 		AddStaticBind(std::move(pvs));
 
-		AddStaticBind(std::make_unique<PixelShader>(gfx, L"ColorBlendPS.cso"));
+		AddStaticBind(std::make_unique<PixelShader>(gfx, L"SolidPS.cso"));
 
 		AddStaticIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices));
 
@@ -54,14 +51,13 @@ BoxBlend::BoxBlend(Graphics& gfx,
 		};
 		const ConstantBuffer2 cb2 =
 		{
-			{ 0.0f, 0.0f, 0.0f }
+			{ red, green, blue }
 		};
 		AddStaticBind(std::make_unique<PixelConstantBuffer<ConstantBuffer2>>(gfx, cb2));
 
 		const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
 		{
-			{ "Position",0,DXGI_FORMAT_R32G32B32_FLOAT,0,D3D11_APPEND_ALIGNED_ELEMENT,D3D11_INPUT_PER_VERTEX_DATA,0 },
-			{ "Color",0,DXGI_FORMAT_R32G32B32A32_FLOAT,0,D3D11_APPEND_ALIGNED_ELEMENT,D3D11_INPUT_PER_VERTEX_DATA,0 },
+			{ "Position",0,DXGI_FORMAT_R32G32B32_FLOAT,0,D3D11_APPEND_ALIGNED_ELEMENT,D3D11_INPUT_PER_VERTEX_DATA,0 }
 		};
 		AddStaticBind(std::make_unique<InputLayout>(gfx, ied, pvsbc));
 
@@ -75,7 +71,7 @@ BoxBlend::BoxBlend(Graphics& gfx,
 	AddBind(std::make_unique<TransformCbuf>(gfx, *this));
 }
 
-void BoxBlend::Update(float dt) noexcept
+void BoxSolid::Update(float dt) noexcept
 {
 	roll += droll * dt;
 	pitch += dpitch * dt;
@@ -85,7 +81,7 @@ void BoxBlend::Update(float dt) noexcept
 	chi += dchi * dt;
 }
 
-DirectX::XMMATRIX BoxBlend::GetTransformXM() const noexcept
+DirectX::XMMATRIX BoxSolid::GetTransformXM() const noexcept
 {
 	return DirectX::XMMatrixRotationRollPitchYaw(pitch, yaw, roll) *
 		DirectX::XMMatrixTranslation(r, 0.0f, 0.0f) *

@@ -1,13 +1,13 @@
 #include "Box.h"
 #include "BindableBase.h"
 #include "GfxExcept.h"
+#include "Cube.h"
 
 Box::Box(Graphics& gfx, std::mt19937& rng,
 	std::uniform_real_distribution<float>& adist,
 	std::uniform_real_distribution<float>& ddist,
 	std::uniform_real_distribution<float>& odist,
-	std::uniform_real_distribution<float>& rdist,
-	IndexedTriangleList<Box::Vertex> obj)
+	std::uniform_real_distribution<float>& rdist)
 	:
 	r		( rdist(rng) ),
 	droll	( ddist(rng) ),
@@ -24,55 +24,25 @@ Box::Box(Graphics& gfx, std::mt19937& rng,
 	
 	if ( !IsStaticInitialized() )
 	{
-		auto model = obj;
+		auto model = Cube::MakeIndependent<Vertex>();
+		model.SetNormalsIndependentFlat();
+
 		model.Transform( dx::XMMatrixScaling( 1.5f, 1.5f, 1.5f ) );
 
 		AddStaticBind(std::make_unique<VertexBuffer>(gfx, model.vertices));
 
-		auto pvs = std::make_unique<VertexShader>(gfx, L"ColorIndexVS.cso");
+		auto pvs = std::make_unique<VertexShader>(gfx, L"PhongVS.cso");
 		auto pvsbc = pvs->GetBytecode();
 		AddStaticBind(std::move(pvs));
 
-		AddStaticBind(std::make_unique<PixelShader>(gfx, L"ColorIndexPS.cso"));
+		AddStaticBind(std::make_unique<PixelShader>(gfx, L"PhongPS.cso"));
 
 		AddStaticIndexBuffer( std::make_unique<IndexBuffer>( gfx, model.indices ) );
 
-		struct ConstantBuffer2
-		{
-			struct
-			{
-				float r;
-				float g;
-				float b;
-				float a;
-			} face_colors[6];
-		};
-		const ConstantBuffer2 cb2 =
-		{
-			{
-				{ 1.0f,0.0f,1.0f },
-				{ 1.0f,0.0f,0.0f },
-				{ 0.0f,1.0f,0.0f },
-				{ 0.0f,0.0f,1.0f },
-				{ 1.0f,1.0f,0.0f },
-				{ 0.0f,1.0f,1.0f },
-			}
-		/*
-			{
-				{ 1.0f,1.0f,1.0f },
-				{ 1.0f,1.0f,1.0f },
-				{ 1.0f,1.0f,1.0f },
-				{ 1.0f,1.0f,1.0f },
-				{ 1.0f,1.0f,1.0f },
-				{ 1.0f,1.0f,1.0f },
-			}
-		*/
-		};
-		AddStaticBind(std::make_unique<PixelConstantBuffer<ConstantBuffer2>>(gfx, cb2));
-
 		const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
 		{
-			{ "Position",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0 },
+			{ "Position",0,DXGI_FORMAT_R32G32B32_FLOAT,0,D3D11_APPEND_ALIGNED_ELEMENT,D3D11_INPUT_PER_VERTEX_DATA,0 },
+			{ "Normal",0,DXGI_FORMAT_R32G32B32_FLOAT,0,D3D11_APPEND_ALIGNED_ELEMENT,D3D11_INPUT_PER_VERTEX_DATA,0 },
 		};
 		AddStaticBind(std::make_unique<InputLayout>(gfx, ied, pvsbc));
 

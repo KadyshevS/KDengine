@@ -9,7 +9,7 @@ BoxTex::BoxTex(Graphics& gfx, std::mt19937& rng,
 	std::uniform_real_distribution<float>& ddist,
 	std::uniform_real_distribution<float>& odist,
 	std::uniform_real_distribution<float>& rdist,
-	IndexedTriangleList<BoxTex::Vertex> obj)
+	const IndexedTriangleList<BoxTex::Vertex> obj)
 	:
 	r(rdist(rng)),
 	droll(ddist(rng)),

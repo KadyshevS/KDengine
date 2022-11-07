@@ -21,7 +21,7 @@ public:
 		std::uniform_real_distribution<float>& ddist,
 		std::uniform_real_distribution<float>& odist,
 		std::uniform_real_distribution<float>& rdist,
-		IndexedTriangleList<BoxTex::Vertex> obj);
+		const IndexedTriangleList<BoxTex::Vertex> obj);
 	void Update(float dt) noexcept override;
 	DirectX::XMMATRIX GetTransformXM() const noexcept override;
 private:
