@@ -120,9 +120,6 @@
     <ClCompile Include="Sampler.cpp">
       <Filter>Исходные файлы\Bindable</Filter>
     </ClCompile>
-    <ClCompile Include="Sheet.cpp">
-      <Filter>Исходные файлы\Drawable</Filter>
-    </ClCompile>
     <ClCompile Include="Imgui\imgui_widgets.cpp">
       <Filter>Исходные файлы\imgui</Filter>
     </ClCompile>
@@ -274,9 +271,6 @@
     </ClInclude>
     <ClInclude Include="Sampler.h">
       <Filter>Файлы заголовков\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="Sheet.h">
-      <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imconfig.h">
       <Filter>Файлы заголовков\imgui</Filter>

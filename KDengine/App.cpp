@@ -9,7 +9,7 @@ GDIPlusManager gdipm;
 
 App::App()
 	:
-	wnd(800, 600, "KDEngine App"),
+	wnd( 800, 600, "KDEngine App" ),
 	pl( wnd.Gfx() )
 {
 	std::mt19937 rng(std::random_device{}());
@@ -17,15 +17,17 @@ App::App()
 	std::uniform_real_distribution<float> ddist(0.0f, PI * 2.0f);
 	std::uniform_real_distribution<float> odist(0.0f, PI * 0.3f);
 	std::uniform_real_distribution<float> rdist(6.0f, 20.0f);
+	std::uniform_real_distribution<float> cdist(0.0f, 1.0f);
 
 	boxes.reserve( boxCount );
 
 	for ( int i = 0; i < boxCount; i++ )
 	{
-		boxes.push_back( 
+		const DirectX::XMFLOAT3 mat = { cdist(rng), cdist(rng), cdist(rng) };
+		boxes.push_back(
 			std::make_unique<Box>(
-				wnd.Gfx(), rng, adist, ddist, odist, rdist
-			) 
+				wnd.Gfx(), rng, adist, ddist, odist, rdist, mat
+			)
 		);
 	}
 
@@ -36,6 +38,7 @@ void App::Update()
 {
 	dt = timer.Mark() * speedF;
 	wnd.Gfx().SetCamera( cam.GetMatrix() );
+	pl.Bind( wnd.Gfx(), cam.GetMatrix() );
 
 	if ( wnd.kbd.KeyIsPressed(VK_SPACE) )
 	{
@@ -46,7 +49,6 @@ void App::Update()
 	{
 		b->Update( dt );
 	}
-	pl.Bind( wnd.Gfx() );
 }
 
 void App::ComposeFrame()
@@ -55,11 +57,11 @@ void App::ComposeFrame()
 	{
 		b->Draw( wnd.Gfx() );
 	}
-	pl.Draw( wnd.Gfx() );
 
+	pl.Draw( wnd.Gfx() );
 	if ( ImGui::Begin( "Simulation Speed" ) )
 	{
-		ImGui::SliderFloat( "Speed Factor", &speedF, 0.0f, 4.0f );
+		ImGui::SliderFloat( "Speed Factor", &speedF, 0.0f, 6.0f, "%.4f", 3.2f );
 		ImGui::Text( "Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate );
 		ImGui::Text( "Status: %s %s", dt == 0.0 ? "STOPPED" : "RUNNING", "(hold Space to stop)");
 	}

@@ -14,6 +14,6 @@ class TransformCbuf : public Bindable
 	const Drawable& parent;
 
 public:
-	TransformCbuf( Graphics& gfx, const Drawable& parent );
+	TransformCbuf( Graphics& gfx, const Drawable& parent, UINT slot = 0u );
 	void Bind( Graphics& gfx ) noexcept override;
 };

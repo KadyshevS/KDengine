@@ -37,7 +37,7 @@ public:
 			}
 			Update();
 
-			wnd.Gfx().BeginFrame( 0.3f, 0.0f, 0.0f );
+			wnd.Gfx().BeginFrame( 0.0f, 0.0f, 0.3f );
 			ComposeFrame();
 			// Imgui
 			static bool show_demo_window = false;
