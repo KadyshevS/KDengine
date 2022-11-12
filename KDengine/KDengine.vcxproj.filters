@@ -156,6 +156,9 @@
     <ClCompile Include="Cylinder.cpp">
       <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
+    <ClCompile Include="Pyramid.cpp">
+      <Filter>Исходные файлы\Drawable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -317,6 +320,9 @@
     <ClInclude Include="Cylinder.h">
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
+    <ClInclude Include="Pyramid.h">
+      <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KDengine.rc">
@@ -354,6 +360,18 @@
       <Filter>Шейдеры</Filter>
     </FxCompile>
     <FxCompile Include="IndexedPhongPS.hlsl">
+      <Filter>Шейдеры</Filter>
+    </FxCompile>
+    <FxCompile Include="BlendedPhongVS.hlsl">
+      <Filter>Шейдеры</Filter>
+    </FxCompile>
+    <FxCompile Include="BlendedPhongPS.hlsl">
+      <Filter>Шейдеры</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedPhongVS.hlsl">
+      <Filter>Шейдеры</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedPhongPS.hlsl">
       <Filter>Шейдеры</Filter>
     </FxCompile>
   </ItemGroup>

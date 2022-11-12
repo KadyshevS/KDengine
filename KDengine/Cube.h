@@ -1,11 +1,12 @@
 #pragma once
 #include "IndexedTriangleList.h"
 #include <DirectXMath.h>
+#include <initializer_list>
 
 class Cube
 {
 public:
-	template <typename V>
+	template<class V>
 	static IndexedTriangleList<V> Make()
 	{
 		namespace dx = DirectX;
@@ -23,7 +24,7 @@ public:
 		vertices[7].pos = { side,side,side };
 
 		return{
-			std::move(vertices),{
+			std::move( vertices ),{
 				0,2,1, 2,3,1,
 				1,3,5, 3,7,5,
 				2,6,3, 3,6,7,
@@ -33,14 +34,15 @@ public:
 			}
 		};
 	}
-	template <typename V>
-	static IndexedTriangleList<V> MakeTextured()
+	template<class V>
+	static IndexedTriangleList<V> MakeSkinned()
 	{
 		namespace dx = DirectX;
 
 		constexpr float side = 1.0f / 2.0f;
 
 		std::vector<V> vertices( 14 );
+
 		vertices[0].pos = { -side,-side,-side };
 		vertices[0].tex = { 2.0f / 3.0f,0.0f / 4.0f };
 		vertices[1].pos = { side,-side,-side };
@@ -71,7 +73,7 @@ public:
 		vertices[13].tex = { 0.0f / 3.0f,2.0f / 4.0f };
 
 		return{
-			std::move(vertices),{
+			std::move( vertices ),{
 				0,2,1,   2,3,1,
 				4,8,5,   5,8,9,
 				2,6,3,   3,6,7,
@@ -86,7 +88,7 @@ public:
 	{
 		constexpr float side = 1.0f / 2.0f;
 
-		std::vector<V> vertices(24);
+		std::vector<V> vertices( 24 );
 		vertices[0].pos = { -side,-side,-side };// 0 near side
 		vertices[1].pos = { side,-side,-side };// 1
 		vertices[2].pos = { -side,side,-side };// 2
@@ -113,7 +115,7 @@ public:
 		vertices[23].pos = { side,side,side };// 23
 
 		return{
-			std::move(vertices),{
+			std::move( vertices ),{
 				0,2, 1,    2,3,1,
 				4,5, 7,    4,7,6,
 				8,10, 9,  10,11,9,
@@ -122,5 +124,37 @@ public:
 				20,23,21, 20,22,23
 			}
 		};
+	}
+	template<class V>
+	static IndexedTriangleList<V> MakeIndependentTextured()
+	{
+		auto itl = MakeIndependent<V>();
+
+		itl.vertices[0].tc = { 0.0f,0.0f };
+		itl.vertices[1].tc = { 1.0f,0.0f };
+		itl.vertices[2].tc = { 0.0f,1.0f };
+		itl.vertices[3].tc = { 1.0f,1.0f };
+		itl.vertices[4].tc = { 0.0f,0.0f };
+		itl.vertices[5].tc = { 1.0f,0.0f };
+		itl.vertices[6].tc = { 0.0f,1.0f };
+		itl.vertices[7].tc = { 1.0f,1.0f };
+		itl.vertices[8].tc =  { 0.0f,0.0f };
+		itl.vertices[9].tc =  { 1.0f,0.0f };
+		itl.vertices[10].tc = { 0.0f,1.0f };
+		itl.vertices[11].tc = { 1.0f,1.0f };
+		itl.vertices[12].tc = { 0.0f,0.0f };
+		itl.vertices[13].tc = { 1.0f,0.0f };
+		itl.vertices[14].tc = { 0.0f,1.0f };
+		itl.vertices[15].tc = { 1.0f,1.0f };
+		itl.vertices[16].tc = { 0.0f,0.0f };
+		itl.vertices[17].tc = { 1.0f,0.0f };
+		itl.vertices[18].tc = { 0.0f,1.0f };
+		itl.vertices[19].tc = { 1.0f,1.0f };
+		itl.vertices[20].tc = { 0.0f,0.0f };
+		itl.vertices[21].tc = { 1.0f,0.0f };
+		itl.vertices[22].tc = { 0.0f,1.0f };
+		itl.vertices[23].tc = { 1.0f,1.0f };
+
+		return itl;
 	}
 };

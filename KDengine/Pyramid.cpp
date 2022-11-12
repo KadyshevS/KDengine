@@ -1,16 +1,16 @@
-#include "BoxTex.h"
+#include "Pyramid.h"
 #include "BindableBase.h"
 #include "GfxExcept.h"
-#include "Cube.h"
-#include "Surface.h"
-#include "Texture.h"
-#include "Sampler.h"
+#include "Cone.h"
+#include <array>
 
-BoxTex::BoxTex( Graphics& gfx,std::mt19937& rng,
+
+Pyramid::Pyramid( Graphics& gfx,std::mt19937& rng,
 	std::uniform_real_distribution<float>& adist,
 	std::uniform_real_distribution<float>& ddist,
 	std::uniform_real_distribution<float>& odist,
-	std::uniform_real_distribution<float>& rdist )
+	std::uniform_real_distribution<float>& rdist,
+	std::uniform_int_distribution<int>& tdist )
 	:
 	TestObject( gfx,rng,adist,ddist,odist,rdist )
 {
@@ -22,23 +22,32 @@ BoxTex::BoxTex( Graphics& gfx,std::mt19937& rng,
 		{
 			dx::XMFLOAT3 pos;
 			dx::XMFLOAT3 n;
-			dx::XMFLOAT2 tc;
+			std::array<char,4> color;
+			char padding;
 		};
-		auto model = Cube::MakeIndependentTextured<Vertex>();
+		const auto tesselation = tdist( rng );
+		auto model = Cone::MakeTesselatedIndependentFaces<Vertex>( tesselation );
+		// set vertex colors for mesh (tip red blending to blue base)
+		for( auto& v : model.vertices )
+		{
+			v.color = { (char)10,(char)10,(char)255 };
+		}
+		for( int i = 0; i < tesselation; i++ )
+		{
+			model.vertices[i * 3].color = { (char)255,(char)10,(char)10 };
+		}
+		// squash mesh a bit in the z direction
+		model.Transform( dx::XMMatrixScaling( 1.0f,1.0f,0.7f ) );
+		// add normals
 		model.SetNormalsIndependentFlat();
-		model.Transform( dx::XMMatrixScaling(1.5f, 1.5f, 1.5f) );
 
 		AddStaticBind( std::make_unique<VertexBuffer>( gfx,model.vertices ) );
 
-		AddStaticBind( std::make_unique<Texture>( gfx,Surface::FromFile( "Images\\kappa.png" ) ) );
-
-		AddStaticBind( std::make_unique<Sampler>( gfx ) );
-
-		auto pvs = std::make_unique<VertexShader>( gfx,L"TexturedPhongVS.cso" );
+		auto pvs = std::make_unique<VertexShader>( gfx,L"BlendedPhongVS.cso" );
 		auto pvsbc = pvs->GetBytecode();
 		AddStaticBind( std::move( pvs ) );
 
-		AddStaticBind( std::make_unique<PixelShader>( gfx,L"TexturedPhongPS.cso" ) );
+		AddStaticBind( std::make_unique<PixelShader>( gfx,L"BlendedPhongPS.cso" ) );
 
 		AddStaticIndexBuffer( std::make_unique<IndexBuffer>( gfx,model.indices ) );
 
@@ -46,12 +55,12 @@ BoxTex::BoxTex( Graphics& gfx,std::mt19937& rng,
 		{
 			{ "Position",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0 },
 			{ "Normal",0,DXGI_FORMAT_R32G32B32_FLOAT,0,12,D3D11_INPUT_PER_VERTEX_DATA,0 },
-			{ "TexCoord",0,DXGI_FORMAT_R32G32_FLOAT,0,24,D3D11_INPUT_PER_VERTEX_DATA,0 },
+			{ "Color",0,DXGI_FORMAT_R8G8B8A8_UNORM,0,24,D3D11_INPUT_PER_VERTEX_DATA,0 },
 		};
 		AddStaticBind( std::make_unique<InputLayout>( gfx,ied,pvsbc ) );
 
 		AddStaticBind( std::make_unique<Topology>( gfx,D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST ) );
-
+		
 		struct PSMaterialConstant
 		{
 			float specularIntensity = 0.6f;

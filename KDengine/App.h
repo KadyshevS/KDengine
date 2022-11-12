@@ -22,10 +22,11 @@ class App
 	bool show_demo_window = false;
 
 	std::vector<std::unique_ptr<Drawable>> boxes;
-	std::vector<std::unique_ptr<Drawable>> cils;
 
-	static constexpr unsigned int boxCount = 80;
-	static constexpr unsigned int cilCount = 80;
+	static constexpr unsigned int boxCount = 45;
+	static constexpr unsigned int cilCount = 45;
+	static constexpr unsigned int pyrmsCount = 45;
+	static constexpr unsigned int tboxCount = 45;
 
 public:
 	App();

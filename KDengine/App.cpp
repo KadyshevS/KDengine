@@ -2,9 +2,9 @@
 #include "GDIPlusManager.h"
 #include "KDMath.h"
 #include "Box.h"
-#include "Cube.h"
-#include "Prism.h"
 #include "Cylinder.h"
+#include "Pyramid.h"
+#include "BoxTex.h"
 #include <random>
 
 GDIPlusManager gdipm; 
@@ -22,8 +22,7 @@ App::App()
 	std::uniform_real_distribution<float> cdist(0.0f, 1.0f);
 	std::uniform_int_distribution<int> tdist(5, 15);
 
-	boxes.reserve( boxCount );
-	cils.reserve( cilCount );
+	boxes.reserve( boxCount+cilCount+pyrmsCount+tboxCount );
 
 	for ( int i = 0; i < boxCount; i++ )
 	{
@@ -36,9 +35,25 @@ App::App()
 	}
 	for (int i = 0; i < cilCount; i++)
 	{
-		cils.push_back(
+		boxes.push_back(
 			std::make_unique<Cylinder>(
 				wnd.Gfx(), rng, adist, ddist, odist, rdist, tdist
+			)
+		);
+	}
+	for (int i = 0; i < pyrmsCount; i++)
+	{
+		boxes.push_back(
+			std::make_unique<Pyramid>(
+				wnd.Gfx(), rng, adist, ddist, odist, rdist, tdist
+			)
+		);
+	}
+	for (int i = 0; i < tboxCount; i++)
+	{
+		boxes.push_back(
+			std::make_unique<BoxTex>(
+				wnd.Gfx(), rng, adist, ddist, odist, rdist
 			)
 		);
 	}
@@ -61,10 +76,6 @@ void App::Update()
 	{
 		b->Update( dt );
 	}
-	for ( auto& c : cils )
-	{
-		c->Update( dt );
-	}
 }
 
 void App::ComposeFrame()
@@ -72,10 +83,6 @@ void App::ComposeFrame()
 	for ( auto& b : boxes )
 	{
 		b->Draw( wnd.Gfx() );
-	}
-	for ( auto& c : cils )
-	{
-		c->Draw( wnd.Gfx() );
 	}
 	pl.Draw( wnd.Gfx() );
 
