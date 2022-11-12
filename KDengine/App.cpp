@@ -3,6 +3,8 @@
 #include "KDMath.h"
 #include "Box.h"
 #include "Cube.h"
+#include "Prism.h"
+#include "Cylinder.h"
 #include <random>
 
 GDIPlusManager gdipm; 
@@ -18,8 +20,10 @@ App::App()
 	std::uniform_real_distribution<float> odist(0.0f, PI * 0.3f);
 	std::uniform_real_distribution<float> rdist(6.0f, 20.0f);
 	std::uniform_real_distribution<float> cdist(0.0f, 1.0f);
+	std::uniform_int_distribution<int> tdist(5, 15);
 
 	boxes.reserve( boxCount );
+	cils.reserve( cilCount );
 
 	for ( int i = 0; i < boxCount; i++ )
 	{
@@ -27,6 +31,14 @@ App::App()
 		boxes.push_back(
 			std::make_unique<Box>(
 				wnd.Gfx(), rng, adist, ddist, odist, rdist, mat
+			)
+		);
+	}
+	for (int i = 0; i < cilCount; i++)
+	{
+		cils.push_back(
+			std::make_unique<Cylinder>(
+				wnd.Gfx(), rng, adist, ddist, odist, rdist, tdist
 			)
 		);
 	}
@@ -49,6 +61,10 @@ void App::Update()
 	{
 		b->Update( dt );
 	}
+	for ( auto& c : cils )
+	{
+		c->Update( dt );
+	}
 }
 
 void App::ComposeFrame()
@@ -57,8 +73,12 @@ void App::ComposeFrame()
 	{
 		b->Draw( wnd.Gfx() );
 	}
-
+	for ( auto& c : cils )
+	{
+		c->Draw( wnd.Gfx() );
+	}
 	pl.Draw( wnd.Gfx() );
+
 	if ( ImGui::Begin( "Simulation Speed" ) )
 	{
 		ImGui::SliderFloat( "Speed Factor", &speedF, 0.0f, 6.0f, "%.4f", 3.2f );

@@ -19,11 +19,13 @@ class App
 
 	float dt;
 	float speedF = 1.0f;
-	bool show_demo_window = true;
+	bool show_demo_window = false;
 
 	std::vector<std::unique_ptr<Drawable>> boxes;
+	std::vector<std::unique_ptr<Drawable>> cils;
 
-	static constexpr unsigned int boxCount = 180;
+	static constexpr unsigned int boxCount = 80;
+	static constexpr unsigned int cilCount = 80;
 
 public:
 	App();

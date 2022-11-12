@@ -8,18 +8,9 @@ Box::Box(Graphics& gfx, std::mt19937& rng,
 	std::uniform_real_distribution<float>& ddist,
 	std::uniform_real_distribution<float>& odist,
 	std::uniform_real_distribution<float>& rdist,
-	const DirectX::XMFLOAT3 material)
+	DirectX::XMFLOAT3 material)
 	:
-	r		( rdist(rng) ),
-	droll	( ddist(rng) ),
-	dpitch	( ddist(rng) ),
-	dyaw	( ddist(rng) ),
-	dphi	( odist(rng) ),
-	dtheta	( odist(rng) ),
-	dchi	( odist(rng) ),
-	chi		( adist(rng) ),
-	theta	( adist(rng) ),
-	phi		( adist(rng) )
+	TestObject<Box>( gfx, rng, adist, ddist, odist, rdist )
 {
 	namespace dx = DirectX;
 	
@@ -27,8 +18,7 @@ Box::Box(Graphics& gfx, std::mt19937& rng,
 	{
 		auto model = Cube::MakeIndependent<Vertex>();
 		model.SetNormalsIndependentFlat();
-
-		model.Transform( dx::XMMatrixScaling( 1.5f, 1.5f, 1.5f ) );
+		model.Transform(dx::XMMatrixScaling(1.5f, 1.5f, 1.5f));
 
 		AddStaticBind(std::make_unique<VertexBuffer>(gfx, model.vertices));
 
@@ -58,28 +48,11 @@ Box::Box(Graphics& gfx, std::mt19937& rng,
 
 	struct PSMaterialConstant
 	{
-		alignas(16) dx::XMFLOAT3 color;
+		dx::XMFLOAT3 color;
 		float specularIntensity = 0.6f;
 		float specularPower = 30.0f;
-		float padding[2];
+		float padding[3];
 	} colorConst;
 	colorConst.color = material;
 	AddBind( std::make_unique<PixelConstantBuffer<PSMaterialConstant>>( gfx, colorConst, 1u ) );
-}
-
-void Box::Update(float dt) noexcept
-{
-	roll += droll * dt;
-	pitch += dpitch * dt;
-	yaw += dyaw * dt;
-	theta += dtheta * dt;
-	phi += dphi * dt;
-	chi += dchi * dt;
-}
-
-DirectX::XMMATRIX Box::GetTransformXM() const noexcept
-{
-	return DirectX::XMMatrixRotationRollPitchYaw(pitch, yaw, roll) *
-		DirectX::XMMatrixTranslation(r, 0.0f, 0.0f) *
-		DirectX::XMMatrixRotationRollPitchYaw(theta, phi, chi);
 }
