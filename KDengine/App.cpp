@@ -86,13 +86,7 @@ void App::ComposeFrame()
 	}
 	pl.Draw( wnd.Gfx() );
 
-	if ( ImGui::Begin( "Simulation Speed" ) )
-	{
-		ImGui::SliderFloat( "Speed Factor", &speedF, 0.0f, 6.0f, "%.4f", 3.2f );
-		ImGui::Text( "Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate );
-		ImGui::Text( "Status: %s %s", dt == 0.0 ? "STOPPED" : "RUNNING", "(hold Space to stop)");
-	}
-	ImGui::End();
+	SpawnFrameSpeedWin();
 	cam.SpawnControlWindow();
 	pl.SpawnControlWindow();
 }

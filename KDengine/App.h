@@ -51,6 +51,16 @@ public:
 			wnd.Gfx().EndFrame();
 		}
 	}
+	void SpawnFrameSpeedWin() noexcept
+	{
+		if (ImGui::Begin("Simulation Speed"))
+		{
+			ImGui::SliderFloat("Speed Factor", &speedF, 0.0f, 6.0f, "%.4f", 3.2f);
+			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+			ImGui::Text("Status: %s %s", dt == 0.0f ? "STOPPED" : "RUNNING", "(hold Space to stop)");
+		}
+		ImGui::End();
+	}
 	~App() = default;
 
 private:

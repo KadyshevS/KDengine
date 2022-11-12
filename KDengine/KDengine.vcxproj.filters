@@ -40,9 +40,6 @@
     <Filter Include="Исходные файлы\imgui">
       <UniqueIdentifier>{5fb61005-7ded-48d4-b535-9abc5bcfd5c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\Models">
-      <UniqueIdentifier>{acd0d106-16ee-404a-847e-487b44ba897f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowsMessageMap.cpp">
@@ -150,13 +147,13 @@
     <ClCompile Include="SolidSphere.cpp">
       <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
-    <ClCompile Include="PointLight.cpp">
-      <Filter>Исходные файлы\Models</Filter>
-    </ClCompile>
     <ClCompile Include="Cylinder.cpp">
       <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
     <ClCompile Include="Pyramid.cpp">
+      <Filter>Исходные файлы\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
       <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
   </ItemGroup>
@@ -311,9 +308,6 @@
     <ClInclude Include="SolidSphere.h">
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
-    <ClInclude Include="PointLight.h">
-      <Filter>Файлы заголовков\Models</Filter>
-    </ClInclude>
     <ClInclude Include="TestObject.h">
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
@@ -321,6 +315,9 @@
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="Pyramid.h">
+      <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
   </ItemGroup>
