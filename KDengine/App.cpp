@@ -6,6 +6,11 @@
 #include "Pyramid.h"
 #include "BoxTex.h"
 #include <random>
+#include "assimp/Importer.hpp"
+#include "assimp/scene.h"
+#include "assimp/postprocess.h"
+
+#pragma comment(lib, "assimp-vc140-mt.lib")
 
 GDIPlusManager gdipm; 
 
@@ -22,7 +27,7 @@ App::App()
 	std::uniform_real_distribution<float> cdist(0.0f, 1.0f);
 	std::uniform_int_distribution<int> tdist(5, 15);
 
-	boxes.reserve( boxCount+cilCount+pyrmsCount+tboxCount );
+	boxes.reserve( boxCount+suzCount+pyrmsCount+tboxCount );
 
 	for ( int i = 0; i < boxCount  ; i++ )
 	{
@@ -33,11 +38,12 @@ App::App()
 			)
 		);
 	}
-	for ( int i = 0; i < cilCount  ; i++ )
+	for ( int i = 0; i < suzCount  ; i++ )
 	{
-		cils.push_back(
-			std::make_unique<Cylinder>(
-				wnd.Gfx(), rng, adist, ddist, odist, rdist, tdist
+		DirectX::XMFLOAT3 mat = { cdist(rng),cdist(rng),cdist(rng) };
+		suzs.push_back(
+			std::make_unique<Suzanne>(
+				wnd.Gfx(), rng, adist, ddist, odist, rdist, mat, 1.5f
 			)
 		);
 	}
@@ -76,7 +82,7 @@ void App::Update()
 	{
 		b->Update( dt );
 	}
-	for (auto& b : cils)
+	for (auto& b : suzs)
 	{
 		b->Update(dt);
 	}
@@ -96,7 +102,7 @@ void App::ComposeFrame()
 	{
 		b->Draw( wnd.Gfx() );
 	}
-	for ( auto& b : cils )
+	for ( auto& b : suzs )
 	{
 		b->Draw( wnd.Gfx() );
 	}

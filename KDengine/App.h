@@ -6,7 +6,7 @@
 #include "Camera.h"
 #include "PointLight.h"
 #include "Box.h"
-#include "Cylinder.h"
+#include "Suzanne.h"
 #include "Pyramid.h"
 #include "BoxTex.h"
 #include "imgui.h"
@@ -115,12 +115,12 @@ private:
 	PointLight pl;
 
 	std::vector<std::unique_ptr<Box>>		boxes;
-	std::vector<std::unique_ptr<Cylinder>>	cils;
+	std::vector<std::unique_ptr<Suzanne>>	suzs;
 	std::vector<std::unique_ptr<Pyramid>>	pyrms;
 	std::vector<std::unique_ptr<BoxTex>>	tboxes;
 
 	static constexpr unsigned int boxCount		= 45;
-	static constexpr unsigned int cilCount		= 45;
+	static constexpr unsigned int suzCount		= 45;
 	static constexpr unsigned int pyrmsCount	= 45;
 	static constexpr unsigned int tboxCount		= 45;
 };

@@ -156,6 +156,9 @@
     <ClCompile Include="PointLight.cpp">
       <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
+    <ClCompile Include="Suzanne.cpp">
+      <Filter>Исходные файлы\Drawable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -318,6 +321,9 @@
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="PointLight.h">
+      <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Suzanne.h">
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
   </ItemGroup>
