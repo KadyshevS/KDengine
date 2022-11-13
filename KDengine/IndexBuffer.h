@@ -1,15 +1,16 @@
 #pragma once
 #include "Bindable.h"
 
-class IndexBuffer : public Bindable
+namespace Bind
 {
-protected:
-	UINT count;
-	Microsoft::WRL::ComPtr<ID3D11Buffer> pIndexBuffer;
-
-public:
-	IndexBuffer( Graphics& gfx, std::vector<unsigned short> indicies );
-
-	void Bind( Graphics& gfx ) noexcept override;
-	UINT GetCount() const noexcept;
-};
+	class IndexBuffer : public Bindable
+	{
+	public:
+		IndexBuffer( Graphics& gfx,const std::vector<unsigned short>& indices );
+		void Bind( Graphics& gfx ) noexcept override;
+		UINT GetCount() const noexcept;
+	protected:
+		UINT count;
+		Microsoft::WRL::ComPtr<ID3D11Buffer> pIndexBuffer;
+	};
+}

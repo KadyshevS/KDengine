@@ -1,10 +1,11 @@
 #include "Suzanne.h"
-#include "BindableBase.h"
+#include "BindableCommon.h"
 #include "GfxExcept.h"
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-#include "Vertex.h"
+#include "assimp/Importer.hpp"
+#include "assimp/scene.h"
+#include "assimp/postprocess.h"
+
+using namespace Bind;
 
 Suzanne::Suzanne(Graphics& gfx, std::mt19937& rng,
 	std::uniform_real_distribution<float>& adist,
@@ -20,8 +21,8 @@ Suzanne::Suzanne(Graphics& gfx, std::mt19937& rng,
 
 	if (!IsStaticInitialized())
 	{
-		using kdexp::VertexLayout;
-		kdexp::VertexBuffer vbuf( std::move(
+		using Dvtx::VertexLayout;
+		Dvtx::VertexBuffer vbuf( std::move(
 			VertexLayout{}
 			.Append( VertexLayout::Position3D )
 			.Append( VertexLayout::Normal )
