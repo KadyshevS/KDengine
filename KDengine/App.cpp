@@ -24,7 +24,7 @@ App::App()
 
 	boxes.reserve( boxCount+cilCount+pyrmsCount+tboxCount );
 
-	for ( int i = 0; i < boxCount; i++ )
+	for ( int i = 0; i < boxCount  ; i++ )
 	{
 		const DirectX::XMFLOAT3 mat = { cdist(rng), cdist(rng), cdist(rng) };
 		boxes.push_back(
@@ -33,31 +33,31 @@ App::App()
 			)
 		);
 	}
-	for (int i = 0; i < cilCount; i++)
+	for ( int i = 0; i < cilCount  ; i++ )
 	{
-		boxes.push_back(
+		cils.push_back(
 			std::make_unique<Cylinder>(
 				wnd.Gfx(), rng, adist, ddist, odist, rdist, tdist
 			)
 		);
 	}
-	for (int i = 0; i < pyrmsCount; i++)
+	for ( int i = 0; i < pyrmsCount; i++ )
 	{
-		boxes.push_back(
+		pyrms.push_back(
 			std::make_unique<Pyramid>(
 				wnd.Gfx(), rng, adist, ddist, odist, rdist, tdist
 			)
 		);
 	}
-	for (int i = 0; i < tboxCount; i++)
+	for ( int i = 0; i < tboxCount ; i++ )
 	{
-		boxes.push_back(
+		tboxes.push_back(
 			std::make_unique<BoxTex>(
 				wnd.Gfx(), rng, adist, ddist, odist, rdist
 			)
 		);
 	}
-
+	
 	wnd.Gfx().SetProjection( DirectX::XMMatrixPerspectiveLH( 1.0f, 3.0f / 4.0f, 0.5f, 40.0f ) );
 }
 
@@ -76,6 +76,18 @@ void App::Update()
 	{
 		b->Update( dt );
 	}
+	for (auto& b : cils)
+	{
+		b->Update(dt);
+	}
+	for (auto& b : pyrms)
+	{
+		b->Update(dt);
+	}
+	for (auto& b : tboxes)
+	{
+		b->Update(dt);
+	}
 }
 
 void App::ComposeFrame()
@@ -84,9 +96,23 @@ void App::ComposeFrame()
 	{
 		b->Draw( wnd.Gfx() );
 	}
+	for ( auto& b : cils )
+	{
+		b->Draw( wnd.Gfx() );
+	}
+	for ( auto& b : pyrms )
+	{
+		b->Draw( wnd.Gfx() );
+	}
+	for ( auto& b : tboxes )
+	{
+		b->Draw( wnd.Gfx() );
+	}
 	pl.Draw( wnd.Gfx() );
 
-	SpawnFrameSpeedWin();
+	SpawnSimulationWindow();
 	cam.SpawnControlWindow();
 	pl.SpawnControlWindow();
+	SpawnBoxWindowManagerWindow();
+	SpawnBoxWindows();
 }

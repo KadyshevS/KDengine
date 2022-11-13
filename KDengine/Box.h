@@ -4,14 +4,14 @@
 
 class Box : public TestObject<Box>
 {
-	DirectX::XMFLOAT3X3 mt;
+	DirectX::XMFLOAT3X3 mt{};
 
 	struct PSMaterialConstant
 	{
-		DirectX::XMFLOAT3 color;
+		DirectX::XMFLOAT3 color = {};
 		float specularIntensity = 0.6f;
 		float specularPower = 30.0f;
-		float padding[3];
+		float padding[3] = {};
 	} materialConstants;
 	using MaterialCbuf = PixelConstantBuffer<PSMaterialConstant>;
 
@@ -31,5 +31,5 @@ public:
 		std::uniform_real_distribution<float>& rdist,
 		DirectX::XMFLOAT3 material);
 
-	void SpawnControlWindow(int id, Graphics& gfx) noexcept;
+	bool SpawnControlWindow(int id, Graphics& gfx) noexcept;
 };

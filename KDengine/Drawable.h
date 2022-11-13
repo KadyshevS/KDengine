@@ -2,6 +2,7 @@
 #include "Graphics.h"
 #include "IndexBuffer.h"
 #include <DirectXMath.h>
+#include <memory>
 
 class Bindable;
 
