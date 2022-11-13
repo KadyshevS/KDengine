@@ -37,12 +37,6 @@
     <Filter Include="Исходные файлы\imgui">
       <UniqueIdentifier>{5fb61005-7ded-48d4-b535-9abc5bcfd5c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Models">
-      <UniqueIdentifier>{c71b00cf-726f-42b4-ac02-d4e8b8ab0d00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\Models\primitives">
-      <UniqueIdentifier>{5ee10243-5f5c-481d-9049-993bd9bfb654}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowsMessageMap.cpp">
@@ -145,9 +139,6 @@
       <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
     <ClCompile Include="PointLight.cpp">
-      <Filter>Исходные файлы\Drawable</Filter>
-    </ClCompile>
-    <ClCompile Include="Suzanne.cpp">
       <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
@@ -287,38 +278,20 @@
     <ClInclude Include="SolidSphere.h">
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
-    <ClInclude Include="TestObject.h">
-      <Filter>Файлы заголовков\Drawable</Filter>
-    </ClInclude>
     <ClInclude Include="PointLight.h">
-      <Filter>Файлы заголовков\Drawable</Filter>
-    </ClInclude>
-    <ClInclude Include="Suzanne.h">
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="Vertex.h">
       <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Cone.h">
-      <Filter>Файлы заголовков\Models\primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="Cube.h">
-      <Filter>Файлы заголовков\Models\primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Файлы заголовков\Models\primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="Prism.h">
-      <Filter>Файлы заголовков\Models\primitives</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Файлы заголовков\Models\primitives</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

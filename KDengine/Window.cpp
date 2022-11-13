@@ -79,7 +79,7 @@ Window::Window(const int Width, const int Height, const char* Name)
 	ImGui_ImplWin32_Init( hWnd );
 
 //	Make Graphics ptr
-	gfx = std::make_unique<Graphics>( hWnd );
+	gfx = std::make_unique<Graphics>( hWnd, width, height );
 }
 
 Window::~Window()

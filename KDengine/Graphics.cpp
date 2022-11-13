@@ -9,12 +9,12 @@
 namespace wrl = Microsoft::WRL;
 namespace dx = DirectX;
 
-Graphics::Graphics(HWND hWnd)
+Graphics::Graphics(HWND hWnd, int width, int height)
 {
 //	Configuring swap chain
 	DXGI_SWAP_CHAIN_DESC sd = {};
-	sd.BufferDesc.Width = 0;
-	sd.BufferDesc.Height = 0;
+	sd.BufferDesc.Width = width;
+	sd.BufferDesc.Height = height;
 	sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	sd.BufferDesc.RefreshRate.Numerator = 0;
 	sd.BufferDesc.RefreshRate.Denominator = 0;
@@ -66,8 +66,8 @@ Graphics::Graphics(HWND hWnd)
 //	Create depth stencil texture
 	wrl::ComPtr<ID3D11Texture2D> pDepthStencil;
 	D3D11_TEXTURE2D_DESC dDepth = {};
-	dDepth.Width = 800u;
-	dDepth.Height = 600u;
+	dDepth.Width = width;
+	dDepth.Height = height;
 	dDepth.MipLevels = 1u;
 	dDepth.ArraySize = 1u;
 	dDepth.Format = DXGI_FORMAT_D32_FLOAT;
@@ -91,8 +91,8 @@ Graphics::Graphics(HWND hWnd)
 
 //	Configure viewport
 	D3D11_VIEWPORT vp;
-	vp.Width = 800;
-	vp.Height = 600;
+	vp.Width = (float)width;
+	vp.Height = (float)height;
 	vp.MinDepth = 0;
 	vp.MaxDepth = 1;
 	vp.TopLeftX = 0;
