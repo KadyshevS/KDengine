@@ -10,8 +10,6 @@
 #include "assimp/scene.h"
 #include "assimp/postprocess.h"
 
-#pragma comment(lib, "assimp-vc140-mt.lib")
-
 GDIPlusManager gdipm; 
 
 App::App()
