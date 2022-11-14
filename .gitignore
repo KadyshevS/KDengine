@@ -51,7 +51,8 @@ artifacts/
 *.ilk
 *.meta
 *.obj
-!KDengine/Models/*.obj
+!KDengine/Models/**/*.obj
+!KDengine/assimp/bin/*
 *.pch
 *.pdb
 *.pgc
