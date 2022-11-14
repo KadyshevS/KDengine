@@ -38,11 +38,12 @@ public:
 
 private:
 //	Window params
-	bool cursorEnabled = false;
+	bool cursorEnabled = true;
 	int width;
 	int height;
 	HWND hWnd;
 	std::unique_ptr<Graphics> gfx;
+	std::vector<BYTE> rawBuffer;
 
 //	Register & cleanup window class
 	class WindowClass
@@ -84,6 +85,7 @@ public:
 
 	void EnableCursor() noexcept;
 	void DisableCursor() noexcept;
+	bool CursorEnabled() const noexcept;
 
 	Graphics& Gfx();
 	static std::optional<int> ProcessMessages();

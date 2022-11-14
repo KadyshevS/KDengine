@@ -1,5 +1,5 @@
-#include "Mouse.h"
 #include "KDWin.h"
+#include "Mouse.h"
 
 void Mouse::OnMouseMove(int newx, int newy) noexcept
 {
@@ -19,6 +19,11 @@ void Mouse::OnMouseEnter() noexcept
 {
 	isInWindow = true;
 	buffer.push(Mouse::Event(Mouse::Event::Type::Enter, *this));
+	TrimBuffer();
+}
+void Mouse::OnRawDelta(int dx, int dy) noexcept
+{
+	rawDeltaBuffer.push({ dx,dy });
 	TrimBuffer();
 }
 void Mouse::OnLeftPressed(int x, int y) noexcept
@@ -66,6 +71,13 @@ void Mouse::TrimBuffer() noexcept
 		buffer.pop();
 	}
 }
+void Mouse::TrimRawInputBuffer() noexcept
+{
+	while (rawDeltaBuffer.size() > bufferSize)
+	{
+		rawDeltaBuffer.pop();
+	}
+}
 void Mouse::OnWheelDelta(int x, int y, int delta) noexcept
 {
 	wheelDeltaCarry += delta;
@@ -85,6 +97,16 @@ void Mouse::OnWheelDelta(int x, int y, int delta) noexcept
 std::pair<int,int> Mouse::GetPos() const noexcept
 {
 	return { x,y };
+}
+std::optional<Mouse::RawDelta> Mouse::ReadRawDelta() noexcept
+{
+	if (rawDeltaBuffer.empty())
+	{
+		return std::nullopt;
+	}
+	const RawDelta d = rawDeltaBuffer.front();
+	rawDeltaBuffer.pop();
+	return d;
 }
 int Mouse::GetPosX() const noexcept
 {
@@ -122,5 +144,17 @@ Mouse::Event Mouse::Read() noexcept
 void Mouse::Flush() noexcept
 {
 	buffer = std::queue<Event>();
+}
+void Mouse::EnableRaw() noexcept
+{
+	rawEnabled = true;
+}
+void Mouse::DisableRaw() noexcept
+{
+	rawEnabled = false;
+}
+bool Mouse::RawEnabled() const noexcept
+{
+	return rawEnabled;
 }
 

@@ -14,8 +14,6 @@ App::App()
 
 void App::Update()
 {
-	dt = timer.Mark() * speedF;
-	wnd.Gfx().SetCamera( cam.GetMatrix() );
 	pl.Bind( wnd.Gfx(), cam.GetMatrix() );
 }
 
@@ -27,4 +25,5 @@ void App::ComposeFrame()
 	cam.SpawnControlWindow();
 	pl.SpawnControlWindow();
 	nano.ShowWindow( "Nano" );
+	ShowRawInputWindow();
 }
