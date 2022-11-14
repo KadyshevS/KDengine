@@ -18,31 +18,22 @@ public:
 		wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 9.0f / 16.0f, 0.5f, 40.0f));
 		while (true)
 		{
+		//	Process Messages every frame
 			if (const auto ecode = Window::ProcessMessages())
 			{
+				// if return optional has value, means we're quitting so return exit code
 				return *ecode;
 			}
 
+		//	Updating deltaTime
 			deltaTime = timer.Mark() * speedF;
+		//	Updating camera position
 			wnd.Gfx().SetCamera( cam.GetMatrix() );
-			while (const auto e = wnd.kbd.ReadKey())
-			{
-				if (e->IsPress() && e->GetCode() == VK_INSERT)
-				{
-					if( wnd.CursorEnabled() )
-					{
-						wnd.DisableCursor();
-						wnd.mouse.EnableRaw();
-					}
-					else
-					{
-						wnd.EnableCursor();
-						wnd.mouse.DisableRaw();
-					}
-				}
-			}
+
+		//	Updating game logic
 			Update();
 
+		//	Draw
 			wnd.Gfx().BeginFrame(0.0f, 0.0f, 0.3f);
 			ComposeFrame();
 			wnd.Gfx().EndFrame();
@@ -58,19 +49,12 @@ public:
 		}
 		ImGui::End();
 	}
-	void ShowRawInputWindow() noexcept
+	void ShowDemoWindow()
 	{
-		while (const auto d = wnd.mouse.ReadRawDelta())
+		if ( showDemoWin )
 		{
-			raw_x += d->x;
-			raw_y += d->y;
+			ImGui::ShowDemoWindow( &showDemoWin );
 		}
-		if (ImGui::Begin("Raw Input"))
-		{
-			ImGui::Text( "Tally: (%d,%d)", raw_x, raw_y );
-			ImGui::Text( "Cursor: %s",wnd.CursorEnabled() ? "enabled" : "disabled" );
-		}
-		ImGui::End();
 	}
 
 private:
@@ -78,10 +62,9 @@ private:
 	void ComposeFrame();
 
 private:
+	bool	showDemoWin = false;
 	float	deltaTime	= 0.0f;
 	float	speedF		= 1.0f;
-	int		raw_x		= 0, 
-			raw_y		= 0;
 
 private:
 	ImguiManager	imgui;
@@ -90,5 +73,5 @@ private:
 	Camera			cam;
 	PointLight		pl;
 
-	Model			nano{ wnd.Gfx(), "Models\\nano_hierarchy.gltf" };
+	Model			nano{ wnd.Gfx(), "Models\\nano.gltf" };
 };
