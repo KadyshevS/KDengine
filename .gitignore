@@ -53,6 +53,7 @@ artifacts/
 *.obj
 !KDengine/Models/**/*.obj
 !KDengine/assimp/bin/*
+!KDengine/*.zip
 *.pch
 *.pdb
 *.pgc
