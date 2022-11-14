@@ -9,10 +9,8 @@ namespace dx = DirectX;
 App::App()
 	:
 	wnd( 1280, 720, "KDEngine App" ),
-	pl( wnd.Gfx() )
-{
-	wnd.Gfx().SetProjection( DirectX::XMMatrixPerspectiveLH( 1.0f, 9.0f / 16.0f, 0.5f, 40.0f ) );
-}
+	pl( wnd.Gfx(), 1.0f )
+{}
 
 void App::Update()
 {

@@ -88,6 +88,49 @@ Window::~Window()
 	DestroyWindow(hWnd);
 }
 
+void Window::ConfineCursor() noexcept
+{
+	RECT rect;
+	GetClientRect( hWnd, &rect );
+	MapWindowPoints( hWnd, nullptr, reinterpret_cast<POINT*>(&rect), 2 );
+	ClipCursor( &rect );
+}
+void Window::FreeCursor() noexcept
+{
+	ClipCursor( nullptr );
+}
+void Window::EnableCursor() noexcept
+{
+	cursorEnabled = true;
+	ShowCursor();
+	EnableImguiMouse();
+	FreeCursor();
+}
+void Window::DisableCursor() noexcept
+{
+	cursorEnabled = false;
+	HideCursor();
+	DisableImguiMouse();
+	ConfineCursor();
+}
+
+void Window::EnableImguiMouse() noexcept
+{
+	ImGui::GetIO().ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
+}
+void Window::DisableImguiMouse() noexcept
+{
+	ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_NoMouse;
+}
+void Window::HideCursor() noexcept
+{
+	while( ::ShowCursor( FALSE ) >= 0 );
+}
+void Window::ShowCursor() noexcept
+{
+	while( ::ShowCursor( TRUE ) < 0 );
+}
+
 LRESULT WINAPI Window::HandleMsgSetup(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
 	if (msg == WM_NCCREATE)
@@ -123,6 +166,21 @@ LRESULT Window::HandleMsg(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		return 0;
 	case WM_KILLFOCUS:
 		kbd.ClearState();
+		break;
+	case WM_ACTIVATE:
+		if ( !cursorEnabled )
+		{
+			if ( wParam & WA_ACTIVE )
+			{
+				ConfineCursor();
+				HideCursor();
+			}
+			else
+			{
+				FreeCursor();
+				ShowCursor();
+			}
+		}
 		break;
 
 //	Keyboard Input
@@ -183,6 +241,11 @@ LRESULT Window::HandleMsg(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	case WM_LBUTTONDOWN:
 	{
 		SetForegroundWindow( hWnd );
+		if ( !cursorEnabled )
+		{
+			ConfineCursor();
+			HideCursor();
+		}
 		if (imio.WantCaptureKeyboard)
 		{
 			break;

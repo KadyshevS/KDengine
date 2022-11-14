@@ -15,12 +15,15 @@ public:
 	~App() = default;
 	int Go()
 	{
+		wnd.EnableCursor();
+		wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 9.0f / 16.0f, 0.5f, 40.0f));
 		while (true)
 		{
 			if (const auto ecode = Window::ProcessMessages())
 			{
 				return *ecode;
 			}
+
 			Update();
 
 			wnd.Gfx().BeginFrame(0.0f, 0.0f, 0.3f);

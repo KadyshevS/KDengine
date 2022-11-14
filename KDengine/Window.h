@@ -38,6 +38,7 @@ public:
 
 private:
 //	Window params
+	bool cursorEnabled = false;
 	int width;
 	int height;
 	HWND hWnd;
@@ -62,10 +63,16 @@ private:
 		static HINSTANCE GetInst() noexcept;
 	};
 
+	void ConfineCursor() noexcept;
+	void FreeCursor() noexcept;
+	void HideCursor() noexcept;
+	void ShowCursor() noexcept;
+	void EnableImguiMouse() noexcept;
+	void DisableImguiMouse() noexcept;
+
 	static LRESULT CALLBACK HandleMsgSetup( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam ) noexcept;
 	static LRESULT CALLBACK HandleMsgThunk( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam ) noexcept;
 	LRESULT HandleMsg( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam ) noexcept;
-
 
 public:
 	Window( const int Width, const int Height, const char* Name );
@@ -74,6 +81,9 @@ public:
 
 	void SetTitle( const char* title );
 	void SetTitle( const std::string& title );
+
+	void EnableCursor() noexcept;
+	void DisableCursor() noexcept;
 
 	Graphics& Gfx();
 	static std::optional<int> ProcessMessages();
