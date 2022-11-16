@@ -73,5 +73,5 @@ private:
 	Camera			cam;
 	PointLight		pl;
 
-	Model			nano{ wnd.Gfx(), "Models\\nano.gltf" };
+	Model			nano{ wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj" };
 };
