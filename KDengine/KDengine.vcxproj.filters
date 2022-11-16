@@ -314,5 +314,11 @@
     <FxCompile Include="SolidPS.hlsl">
       <Filter>Шейдеры</Filter>
     </FxCompile>
+    <FxCompile Include="PhongSpecMapPS.hlsl">
+      <Filter>Шейдеры</Filter>
+    </FxCompile>
+    <FxCompile Include="SolidVS.hlsl">
+      <Filter>Шейдеры</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
