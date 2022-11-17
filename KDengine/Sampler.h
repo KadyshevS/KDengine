@@ -1,5 +1,6 @@
 #pragma once
 #include "Bindable.h"
+#include <memory>
 
 namespace Bind
 {
@@ -11,5 +12,8 @@ namespace Bind
 	public:
 		Sampler(Graphics& gfx);
 		void Bind(Graphics& gfx) noexcept override;
+		static std::shared_ptr<Sampler> Resolve(Graphics& gfx);
+		static std::string GenerateUID();
+		std::string GetUID() const noexcept override;
 	};
 }

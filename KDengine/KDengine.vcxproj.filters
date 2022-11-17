@@ -224,9 +224,6 @@
     <ClInclude Include="Drawable.h">
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
-    <ClInclude Include="DrawableBase.h">
-      <Filter>Файлы заголовков\Drawable</Filter>
-    </ClInclude>
     <ClInclude Include="KDMath.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -292,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="BindableCodex.h">
+      <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

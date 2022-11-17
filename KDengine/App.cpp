@@ -84,9 +84,11 @@ void App::Update()
 void App::ComposeFrame()
 {
 	nano.Draw( wnd.Gfx() );
+	nano2.Draw( wnd.Gfx() );
 	pl.Draw( wnd.Gfx() );
 
 	cam.SpawnControlWindow();
 	pl.SpawnControlWindow();
-	nano.ShowWindow("Nano");
+	nano.ShowWindow("Nano 1");
+	nano2.ShowWindow("Nano 2");
 }
