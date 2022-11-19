@@ -10,41 +10,16 @@ App::App()
 	:
 	wnd( 1280, 720, "KDEngine App" ),
 	pl( wnd.Gfx(), 1.0f )
-{}
+{
+	plane.SetPos( { 1.0f,17.0f,-1.0f } );
+}
 
 void App::Update()
 {
 	pl.Bind( wnd.Gfx(), cam.GetMatrix() );
+	CheckMouseInWin();
 
-	//	Input capture
-	while ( const auto e = wnd.kbd.ReadKey() )
-	{
-		if ( !e->IsPress() )
-		{
-			continue;
-		}
-
-		switch (e->GetCode())
-		{
-		case VK_ESCAPE:
-			if (wnd.CursorEnabled())
-			{
-				wnd.DisableCursor();
-				wnd.mouse.EnableRaw();
-			}
-			else
-			{
-				wnd.EnableCursor();
-				wnd.mouse.DisableRaw();
-			}
-			break;
-		case VK_F1:
-			showDemoWin = true;
-			break;
-		}
-	}
-
-	if ( !wnd.CursorEnabled() )
+	if (!wnd.CursorEnabled())
 	{
 		if (wnd.kbd.KeyIsPressed('W'))
 		{
@@ -81,14 +56,14 @@ void App::Update()
 	}
 }
 
-void App::ComposeFrame()
+void App::DoFrame()
 {
 	nano.Draw( wnd.Gfx() );
-	nano2.Draw( wnd.Gfx() );
+	plane.Draw( wnd.Gfx() );
 	pl.Draw( wnd.Gfx() );
 
 	cam.SpawnControlWindow();
 	pl.SpawnControlWindow();
 	nano.ShowWindow("Nano 1");
-	nano2.ShowWindow("Nano 2");
+	plane.SpawnControlWindow( wnd.Gfx() );
 }

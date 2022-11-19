@@ -6,6 +6,7 @@
 #include "PointLight.h"
 #include "Camera.h"
 #include "Mesh.h"
+#include "TestPlane.h"
 #include <set>
 
 class App
@@ -35,7 +36,7 @@ public:
 
 		//	Draw
 			wnd.Gfx().BeginFrame(0.0f, 0.0f, 0.3f);
-			ComposeFrame();
+			DoFrame();
 			wnd.Gfx().EndFrame();
 		}
 	}
@@ -49,17 +50,46 @@ public:
 		}
 		ImGui::End();
 	}
-	void ShowDemoWindow()
+	void ShowDemoWindow() noexcept
 	{
 		if ( showDemoWin )
 		{
 			ImGui::ShowDemoWindow( &showDemoWin );
 		}
 	}
+	void CheckMouseInWin() noexcept
+	{
+		while (const auto e = wnd.kbd.ReadKey())
+		{
+			if (!e->IsPress())
+			{
+				continue;
+			}
+
+			switch (e->GetCode())
+			{
+			case VK_ESCAPE:
+				if (wnd.CursorEnabled())
+				{
+					wnd.DisableCursor();
+					wnd.mouse.EnableRaw();
+				}
+				else
+				{
+					wnd.EnableCursor();
+					wnd.mouse.DisableRaw();
+				}
+				break;
+			case VK_F1:
+				showDemoWin = true;
+				break;
+			}
+		}
+	}
 
 private:
 	void Update();
-	void ComposeFrame();
+	void DoFrame();
 
 private:
 	bool	showDemoWin = false;
@@ -74,5 +104,5 @@ private:
 	PointLight		pl;
 
 	Model			nano{ wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj" };
-	Model			nano2{ wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj" };
+	TestPlane		plane{ wnd.Gfx(), 3.0f };
 };

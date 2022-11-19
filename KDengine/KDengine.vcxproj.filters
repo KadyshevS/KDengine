@@ -147,6 +147,9 @@
     <ClCompile Include="Vertex.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="TestPlane.cpp">
+      <Filter>Исходные файлы\Drawable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -293,6 +296,12 @@
     <ClInclude Include="BindableCodex.h">
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="TestPlane.h">
+      <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KDengine.rc">
@@ -318,6 +327,9 @@
       <Filter>Шейдеры</Filter>
     </FxCompile>
     <FxCompile Include="SolidVS.hlsl">
+      <Filter>Шейдеры</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongNormalMapPS.hlsl">
       <Filter>Шейдеры</Filter>
     </FxCompile>
   </ItemGroup>
