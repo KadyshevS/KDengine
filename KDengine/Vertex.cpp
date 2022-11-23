@@ -33,12 +33,13 @@ namespace Dvtx
 	std::string VertexLayout::GetCode() const noexcept(!IS_DEBUG)
 	{
 		std::string code;
-		for (const auto& e : elements)
+		for( const auto& e : elements )
 		{
 			code += e.GetCode();
 		}
 		return code;
 	}
+
 
 	// VertexLayout::Element
 	VertexLayout::Element::Element( ElementType type,size_t offset )
@@ -70,6 +71,10 @@ namespace Dvtx
 			return sizeof( Map<Texture2D>::SysType );
 		case Normal:
 			return sizeof( Map<Normal>::SysType );
+		case Tangent:
+			return sizeof( Map<Tangent>::SysType );
+		case Bitangent:
+			return sizeof( Map<Bitangent>::SysType );
 		case Float3Color:
 			return sizeof( Map<Float3Color>::SysType );
 		case Float4Color:
@@ -96,6 +101,10 @@ namespace Dvtx
 			return Map<Texture2D>::code;
 		case Normal:
 			return Map<Normal>::code;
+		case Tangent:
+			return Map<Tangent>::code;
+		case Bitangent:
+			return Map<Bitangent>::code;
 		case Float3Color:
 			return Map<Float3Color>::code;
 		case Float4Color:
@@ -118,6 +127,10 @@ namespace Dvtx
 			return GenerateDesc<Texture2D>( GetOffset() );
 		case Normal:
 			return GenerateDesc<Normal>( GetOffset() );
+		case Tangent:
+			return GenerateDesc<Tangent>( GetOffset() );
+		case Bitangent:
+			return GenerateDesc<Bitangent>( GetOffset() );
 		case Float3Color:
 			return GenerateDesc<Float3Color>( GetOffset() );
 		case Float4Color:
@@ -145,10 +158,20 @@ namespace Dvtx
 
 
 	// VertexBuffer
-	VertexBuffer::VertexBuffer( VertexLayout layout ) noexcept(!IS_DEBUG)
+	VertexBuffer::VertexBuffer( VertexLayout layout,size_t size ) noexcept(!IS_DEBUG)
 		:
 		layout( std::move( layout ) )
-	{}
+	{
+		Resize( size );
+	}
+	void VertexBuffer::Resize( size_t newSize ) noexcept(!IS_DEBUG)
+	{
+		const auto size = Size();
+		if( size < newSize )
+		{
+			buffer.resize( buffer.size() + layout.Size() * (newSize - size) );
+		}
+	}
 	const char* VertexBuffer::GetData() const noexcept(!IS_DEBUG)
 	{
 		return buffer.data();

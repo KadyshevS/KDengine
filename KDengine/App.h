@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Mesh.h"
 #include "TestPlane.h"
+#include "TestCube.h"
 #include <set>
 
 class App
@@ -16,7 +17,6 @@ public:
 	~App() = default;
 	int Go()
 	{
-		wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 9.0f / 16.0f, 0.5f, 40.0f));
 		while (true)
 		{
 		//	Process Messages every frame
@@ -103,6 +103,5 @@ private:
 	Camera			cam;
 	PointLight		pl;
 
-	Model			nano{ wnd.Gfx(), "Models\\nano_textured\\nanosuit.obj" };
-	TestPlane		plane{ wnd.Gfx(), 3.0f };
+	Model		plane{ wnd.Gfx(), "Models\\brick_wall\\brick_wall.obj" };
 };

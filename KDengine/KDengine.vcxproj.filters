@@ -37,6 +37,15 @@
     <Filter Include="Исходные файлы\imgui">
       <UniqueIdentifier>{5fb61005-7ded-48d4-b535-9abc5bcfd5c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Geometric privitives">
+      <UniqueIdentifier>{c91139b6-42cb-4157-8ade-b661de16efda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Шейдеры\PS">
+      <UniqueIdentifier>{048eb44a-74e9-421e-8bea-667d5a4550a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Шейдеры\VS">
+      <UniqueIdentifier>{65d74bff-c7e7-4153-b778-f0848788dff5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowsMessageMap.cpp">
@@ -150,6 +159,12 @@
     <ClCompile Include="TestPlane.cpp">
       <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
+    <ClCompile Include="TransformCbufDouble.cpp">
+      <Filter>Исходные файлы\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCube.cpp">
+      <Filter>Исходные файлы\Drawable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -162,9 +177,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="KDException.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Keyboard.h">
@@ -296,11 +308,23 @@
     <ClInclude Include="BindableCodex.h">
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Файлы заголовков\Drawable</Filter>
-    </ClInclude>
     <ClInclude Include="TestPlane.h">
       <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformCbufDouble.h">
+      <Filter>Файлы заголовков\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCube.h">
+      <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Файлы заголовков\Geometric privitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Файлы заголовков\Geometric privitives</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -314,23 +338,32 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="PhongVS.hlsl">
-      <Filter>Шейдеры</Filter>
-    </FxCompile>
-    <FxCompile Include="PhongPS.hlsl">
-      <Filter>Шейдеры</Filter>
-    </FxCompile>
-    <FxCompile Include="SolidPS.hlsl">
-      <Filter>Шейдеры</Filter>
-    </FxCompile>
-    <FxCompile Include="PhongSpecMapPS.hlsl">
-      <Filter>Шейдеры</Filter>
-    </FxCompile>
-    <FxCompile Include="SolidVS.hlsl">
-      <Filter>Шейдеры</Filter>
+    <FxCompile Include="PhongNormalMapObjectPS.hlsl">
+      <Filter>Шейдеры\PS</Filter>
     </FxCompile>
     <FxCompile Include="PhongNormalMapPS.hlsl">
-      <Filter>Шейдеры</Filter>
+      <Filter>Шейдеры\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongPS.hlsl">
+      <Filter>Шейдеры\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongSpecMapPS.hlsl">
+      <Filter>Шейдеры\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongSpecNormalMapPS.hlsl">
+      <Filter>Шейдеры\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="SolidPS.hlsl">
+      <Filter>Шейдеры\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongNormalMapVS.hlsl">
+      <Filter>Шейдеры\VS</Filter>
+    </FxCompile>
+    <FxCompile Include="SolidVS.hlsl">
+      <Filter>Шейдеры\VS</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongVS.hlsl">
+      <Filter>Шейдеры\VS</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
