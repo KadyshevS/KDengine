@@ -103,5 +103,5 @@ private:
 	Camera			cam;
 	PointLight		pl;
 
-	Model		plane{ wnd.Gfx(), "Models\\brick_wall\\brick_wall.obj" };
+	Model	gobber{ wnd.Gfx(), "Models\\gobber\\GoblinX.obj" };
 };

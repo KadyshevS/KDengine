@@ -57,10 +57,11 @@ void App::Update()
 
 void App::DoFrame()
 {
-	plane.Draw( wnd.Gfx() );
+	gobber.Draw( wnd.Gfx() );
 	pl.Draw( wnd.Gfx() );
 
 	cam.SpawnControlWindow();
 	pl.SpawnControlWindow();
-	plane.ShowWindow();
+	gobber.ShowWindow( wnd.Gfx(), "Gobber" );
+	
 }

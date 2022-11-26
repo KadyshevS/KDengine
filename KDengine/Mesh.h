@@ -6,6 +6,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include "ConstantBuffer.h"
 
 class ModelException : public KDException
 {
@@ -32,11 +33,24 @@ class Node
 {
 	friend class Model;
 public:
+	struct PSMaterialConstantFullmonte
+	{
+		BOOL  normalMapEnabled = TRUE;
+		BOOL  specularMapEnabled = TRUE;
+		BOOL  hasGlossMap = FALSE;
+		float specularPower = 1.0f;
+		DirectX::XMFLOAT3 specularColor = { 1.0f,1.0f,1.0f };
+		float specularMapWeight = 1.0f;
+	};
+
+public:
 	Node( int id,const std::string& name,std::vector<Mesh*> meshPtrs,const DirectX::XMMATRIX& transform ) noexcept(!IS_DEBUG);
 	void Draw( Graphics& gfx,DirectX::FXMMATRIX accumulatedTransform ) const noexcept(!IS_DEBUG);
 	void SetAppliedTransform( DirectX::FXMMATRIX transform ) noexcept;
 	int  GetId() const noexcept;
 	void ShowTree(Node*& pSelectedNode) const noexcept;
+	void Control( Graphics& gfx,PSMaterialConstantFullmonte& c );
+
 private:
 	void AddChild( std::unique_ptr<Node> pChild ) noexcept(!IS_DEBUG);
 
@@ -54,7 +68,7 @@ class Model
 public:
 	Model( Graphics& gfx,const std::string fileName );
 	void Draw( Graphics& gfx ) const noexcept(!IS_DEBUG);
-	void ShowWindow( const char* windowName = nullptr ) noexcept;
+	void ShowWindow( Graphics& gfx, const char* windowName = nullptr ) noexcept;
 	void SetRootTransform( DirectX::FXMMATRIX tf ) noexcept;
 	~Model() noexcept;
 private:
