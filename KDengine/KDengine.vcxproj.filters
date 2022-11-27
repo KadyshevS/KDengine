@@ -329,6 +329,9 @@
     <ClInclude Include="Resource.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
+    <ClInclude Include="NormalMapTweaker.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KDengine.rc">
@@ -378,6 +381,12 @@
       <Filter>Шейдеры\fx</Filter>
     </FxCompile>
     <FxCompile Include="PointLight.hlsl">
+      <Filter>Шейдеры\fx</Filter>
+    </FxCompile>
+    <FxCompile Include="Transform.hlsl">
+      <Filter>Шейдеры\fx</Filter>
+    </FxCompile>
+    <FxCompile Include="LightVectorData.hlsl">
       <Filter>Шейдеры\fx</Filter>
     </FxCompile>
   </ItemGroup>

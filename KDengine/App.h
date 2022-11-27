@@ -13,7 +13,7 @@
 class App
 {
 public:
-	App();
+	App( const std::string& commandLine = "" );
 	~App() = default;
 	int Go()
 	{
@@ -97,11 +97,14 @@ private:
 	float	speedF		= 1.0f;
 
 private:
+	std::string		commandLine;
 	ImguiManager	imgui;
 	Window			wnd;
 	FrameTimer		timer;
 	Camera			cam;
 	PointLight		pl;
 
-	Model	gobber{ wnd.Gfx(), "Models\\gobber\\GoblinX.obj" };
+	Model		gobber{ wnd.Gfx(), "Models\\gobber\\GoblinX.obj" };
+	Model		plane { wnd.Gfx(), "Models\\brick_wall\\brick_wall.obj" };
+	TestPlane	plane2{ wnd.Gfx(), 8.0f };
 };

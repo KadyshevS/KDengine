@@ -44,6 +44,7 @@ private:
 	HWND hWnd;
 	std::unique_ptr<Graphics> gfx;
 	std::vector<BYTE> rawBuffer;
+	std::string commandLine;
 
 //	Register & cleanup window class
 	class WindowClass
