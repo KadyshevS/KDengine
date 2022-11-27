@@ -61,6 +61,8 @@ void App::Update()
 
 	if (!wnd.CursorEnabled())
 	{
+		speedCam = wnd.kbd.KeyIsPressed(VK_SHIFT) ? 1.0f : 4.0f;
+
 		if (wnd.kbd.KeyIsPressed('W'))
 		{
 			cam.Translate({ 0.0f,0.0f,speedCam*deltaTime });
