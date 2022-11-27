@@ -30,12 +30,10 @@ public:
 			deltaTime = timer.Mark() * speedF;
 		//	Updating camera position
 			wnd.Gfx().SetCamera( cam.GetMatrix() );
-
 		//	Updating game logic
 			Update();
-
 		//	Draw
-			wnd.Gfx().BeginFrame(0.0f, 0.0f, 0.3f);
+			wnd.Gfx().BeginFrame( 0.0f, 0.0f, 0.3f );
 			DoFrame();
 			wnd.Gfx().EndFrame();
 		}

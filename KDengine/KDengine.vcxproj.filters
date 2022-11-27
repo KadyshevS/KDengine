@@ -171,6 +171,9 @@
     <ClCompile Include="ExtendedXM.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="TexturePreprocessor.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -332,7 +335,7 @@
     <ClInclude Include="Resource.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
-    <ClInclude Include="NormalMapTweaker.h">
+    <ClInclude Include="TexturePreprocessor.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="ExtendedXM.h">
