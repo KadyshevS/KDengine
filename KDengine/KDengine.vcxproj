@@ -170,6 +170,7 @@
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="DxErr.cpp" />
     <ClCompile Include="DxgiInfoManager.cpp" />
+    <ClCompile Include="ExtendedXM.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="GDIPlusManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="DxErr.h" />
     <ClInclude Include="DxgiInfoManager.h" />
+    <ClInclude Include="ExtendedXM.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="GDIPlusManager.h" />
     <ClInclude Include="GfxExcept.h" />
