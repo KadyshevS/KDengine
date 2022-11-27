@@ -31,10 +31,8 @@ App::App( const std::string& commandLine )
 		}
 	}
 
-	plane.SetRootTransform( DirectX::XMMatrixTranslation( 15.0f, 0.0f, 0.0f ) );
-	plane2.SetPos( { -15.0f, 0.0f, 0.0f } );
-	gobber.SetRootTransform( DirectX::XMMatrixTranslation( 0.0f, 0.0f, 10.0f ) );
-	wnd.Gfx().SetProjection( DirectX::XMMatrixPerspectiveLH( 1.0f, 9.0f / 16.0f, 0.5f, 40.0f ) );
+	sponza.SetRootTransform( dx::XMMatrixScaling(0.01f, 0.01f, 0.01f) );
+	wnd.Gfx().SetProjection( DirectX::XMMatrixPerspectiveLH( 1.0f, 9.0f / 16.0f, 0.5f, 400.0f ) );
 }
 
 void App::Update()
@@ -80,13 +78,9 @@ void App::Update()
 
 void App::DoFrame()
 {
-	gobber.Draw( wnd.Gfx() );
-	plane.Draw( wnd.Gfx() );
-	plane2.Draw( wnd.Gfx() );
 	pl.Draw( wnd.Gfx() );
+	sponza.Draw(wnd.Gfx());
 
 	cam.SpawnControlWindow();
 	pl.SpawnControlWindow();
-	gobber.ShowWindow( wnd.Gfx(), "Gobber" );
-	plane.ShowWindow( wnd.Gfx(), "Brick wall" );
 }
