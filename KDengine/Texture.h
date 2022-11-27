@@ -17,6 +17,9 @@ namespace Bind
 		bool HasAlpha() const noexcept;
 
 	private:
+		static UINT CalculateNumberOfMipLevels( UINT width,UINT height ) noexcept;
+
+	private:
 		unsigned int slot;
 
 	protected:

@@ -63,27 +63,27 @@ void App::Update()
 	{
 		if (wnd.kbd.KeyIsPressed('W'))
 		{
-			cam.Translate({ 0.0f,0.0f,deltaTime });
+			cam.Translate({ 0.0f,0.0f,speedCam*deltaTime });
 		}
 		if (wnd.kbd.KeyIsPressed('A'))
 		{
-			cam.Translate({ -deltaTime,0.0f,0.0f });
+			cam.Translate({ speedCam*-deltaTime,0.0f,0.0f });
 		}
 		if (wnd.kbd.KeyIsPressed('S'))
 		{
-			cam.Translate({ 0.0f,0.0f,-deltaTime });
+			cam.Translate({ 0.0f,0.0f,speedCam*-deltaTime });
 		}
 		if (wnd.kbd.KeyIsPressed('D'))
 		{
-			cam.Translate({ deltaTime,0.0f,0.0f });
+			cam.Translate({ speedCam*deltaTime,0.0f,0.0f });
 		}
 		if (wnd.kbd.KeyIsPressed('R'))
 		{
-			cam.Translate({ 0.0f,deltaTime,0.0f });
+			cam.Translate({ 0.0f,speedCam*deltaTime,0.0f });
 		}
 		if (wnd.kbd.KeyIsPressed('F'))
 		{
-			cam.Translate({ 0.0f,-deltaTime,0.0f });
+			cam.Translate({ 0.0f,speedCam*-deltaTime,0.0f });
 		}
 	}
 	while (const auto delta = wnd.mouse.ReadRawDelta())

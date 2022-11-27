@@ -93,6 +93,7 @@ private:
 	bool	showDemoWin = false;
 	float	deltaTime	= 0.0f;
 	float	speedF		= 1.0f;
+	float	speedCam	= 4.0f;
 
 private:
 	std::string		commandLine;

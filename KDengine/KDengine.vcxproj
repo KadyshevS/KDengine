@@ -222,6 +222,7 @@
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="GDIPlusManager.h" />
     <ClInclude Include="GfxExcept.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="ImguiManager.h" />
     <ClInclude Include="Imgui\imconfig.h" />
