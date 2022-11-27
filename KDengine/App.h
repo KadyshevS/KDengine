@@ -103,5 +103,6 @@ private:
 	Camera			cam;
 	PointLight		pl;
 
-	Model	sponza{ wnd.Gfx(), "Models\\sponza\\sponza.obj" };
+	Model		sponza{ wnd.Gfx(), "Models\\sponza\\sponza.obj" };
+	TestPlane	plane{ wnd.Gfx(), 6.0f, {0.3f, 0.3f, 1.0f, 1.0f} };
 };

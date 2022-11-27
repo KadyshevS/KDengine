@@ -1,6 +1,5 @@
 #include "ShaderOps.hlsl"
 #include "LightVectorData.hlsl"
-
 #include "PointLight.hlsl"
 
 cbuffer ObjectCBuf
@@ -21,9 +20,19 @@ SamplerState splr;
 
 float4 main(float3 viewFragPos : Position, float3 viewNormal : Normal, float3 viewTan : Tangent, float3 viewBitan : Bitangent, float2 tc : Texcoord) : SV_Target
 {
-    // do alpha test    
+    // sample diffuse texture
     float4 dtex = tex.Sample(splr, tc);
+
+#ifdef IS_MASK
+    // bail if highly translucent
     clip(dtex.a < 0.1f ? -1 : 1);
+    // flip normal when backface
+    if (dot(viewNormal, viewFragPos) >= 0.0f)
+    {
+        viewNormal = -viewNormal;
+    }
+#endif
+
     // normalize the mesh normal
     viewNormal = normalize(viewNormal);
     // replace normal with mapped if normal mapping enabled
@@ -49,7 +58,6 @@ float4 main(float3 viewFragPos : Position, float3 viewNormal : Normal, float3 vi
     {
         specularReflectionColor = specularColor;
     }
-
 	// attenuation
     const float att = Attenuate(attConst, attLin, attQuad, lv.distToL);
 	// diffuse light
@@ -60,5 +68,5 @@ float4 main(float3 viewFragPos : Position, float3 viewNormal : Normal, float3 vi
         lv.vToL, viewFragPos, att, specularPower
     );
 	// final color = attenuate diffuse & ambient by diffuse texture color and add specular reflected
-    return float4( saturate( (diffuse + ambient) * dtex.rgb + specularReflected ), dtex.a );
+    return float4(saturate((diffuse + ambient) * dtex.rgb + specularReflected), dtex.a);
 }

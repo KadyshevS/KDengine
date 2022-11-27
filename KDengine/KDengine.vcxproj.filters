@@ -180,6 +180,9 @@
     <ClCompile Include="Blender.cpp">
       <Filter>Исходные файлы\Bindable</Filter>
     </ClCompile>
+    <ClCompile Include="Rasterizer.cpp">
+      <Filter>Исходные файлы\Bindable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -353,6 +356,9 @@
     <ClInclude Include="Blender.h">
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
+    <ClInclude Include="Rasterizer.h">
+      <Filter>Файлы заголовков\Bindable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KDengine.rc">
@@ -375,9 +381,6 @@
       <Filter>Шейдеры\PS</Filter>
     </FxCompile>
     <FxCompile Include="PhongSpecMapPS.hlsl">
-      <Filter>Шейдеры\PS</Filter>
-    </FxCompile>
-    <FxCompile Include="PhongSpecNormalMapPS.hlsl">
       <Filter>Шейдеры\PS</Filter>
     </FxCompile>
     <FxCompile Include="SolidPS.hlsl">
@@ -409,6 +412,12 @@
     </FxCompile>
     <FxCompile Include="LightVectorData.hlsl">
       <Filter>Шейдеры\fx</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongSpecNormMaskPS.hlsl">
+      <Filter>Шейдеры\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongSpecNormalMapPS.hlsl">
+      <Filter>Шейдеры\PS</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

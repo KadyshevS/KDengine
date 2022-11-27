@@ -100,8 +100,10 @@ void App::Update()
 void App::DoFrame()
 {
 	pl.Draw( wnd.Gfx() );
-	sponza.Draw(wnd.Gfx());
+	sponza.Draw( wnd.Gfx() );
+	plane.Draw( wnd.Gfx() );
 
 	cam.SpawnControlWindow();
 	pl.SpawnControlWindow();
+	plane.SpawnControlWindow( wnd.Gfx() );
 }
