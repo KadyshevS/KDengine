@@ -46,6 +46,9 @@
     <Filter Include="Шейдеры\VS">
       <UniqueIdentifier>{65d74bff-c7e7-4153-b778-f0848788dff5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Шейдеры\fx">
+      <UniqueIdentifier>{82c6cd93-d70a-4eab-b55c-37d11cfc0866}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowsMessageMap.cpp">
@@ -370,6 +373,12 @@
     </FxCompile>
     <FxCompile Include="PhongNotexPS.hlsl">
       <Filter>Шейдеры\PS</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderOps.hlsl">
+      <Filter>Шейдеры\fx</Filter>
+    </FxCompile>
+    <FxCompile Include="PointLight.hlsl">
+      <Filter>Шейдеры\fx</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
