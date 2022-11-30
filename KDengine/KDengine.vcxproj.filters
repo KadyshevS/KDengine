@@ -49,9 +49,6 @@
     <Filter Include="Шейдеры\fx">
       <UniqueIdentifier>{82c6cd93-d70a-4eab-b55c-37d11cfc0866}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Конфиг">
-      <UniqueIdentifier>{72e83736-3ea1-4973-9a8d-1025e8150a45}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Прочее">
       <UniqueIdentifier>{a108f43d-6473-4fc5-b81b-85a59d97190b}</UniqueIdentifier>
     </Filter>
@@ -353,9 +350,6 @@
     <ClInclude Include="ExtendedXM.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Config.h">
-      <Filter>Конфиг</Filter>
-    </ClInclude>
     <ClInclude Include="Blender.h">
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
@@ -370,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="ScriptCommander.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Файлы заголовков\Macros</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
