@@ -7,7 +7,7 @@
 #include "Camera.h"
 #include "Mesh.h"
 #include "TestPlane.h"
-#include "TestCube.h"
+#include "ScriptCommander.h"
 #include <set>
 
 class App
@@ -139,6 +139,7 @@ private:
 private:
 	std::string		commandLine;
 	ImguiManager	imgui;
+	ScriptCommander sComm;
 	Window			wnd;
 	FrameTimer		timer;
 	Camera			cam;

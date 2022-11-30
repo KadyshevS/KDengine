@@ -52,6 +52,9 @@
     <Filter Include="Конфиг">
       <UniqueIdentifier>{72e83736-3ea1-4973-9a8d-1025e8150a45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Прочее">
+      <UniqueIdentifier>{a108f43d-6473-4fc5-b81b-85a59d97190b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowsMessageMap.cpp">
@@ -179,6 +182,12 @@
     </ClCompile>
     <ClCompile Include="Rasterizer.cpp">
       <Filter>Исходные файлы\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="QuoteUtil.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptCommander.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -353,6 +362,15 @@
     <ClInclude Include="Rasterizer.h">
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
+    <ClInclude Include="QuoteUtil.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptCommander.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KDengine.rc">
@@ -413,5 +431,10 @@
     <FxCompile Include="PhongSpecNormalMapPS.hlsl">
       <Filter>Шейдеры\PS</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="process.json">
+      <Filter>Прочее</Filter>
+    </None>
   </ItemGroup>
 </Project>

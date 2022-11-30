@@ -4,6 +4,7 @@
 #include <cassert>
 #include <sstream>
 #include <filesystem>
+#include "ScriptCommander.h"
 
 Surface::Surface( unsigned int width,unsigned int height )
 {

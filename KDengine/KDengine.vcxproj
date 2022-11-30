@@ -189,8 +189,10 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="PointLight.cpp" />
+    <ClCompile Include="QuoteUtil.cpp" />
     <ClCompile Include="Rasterizer.cpp" />
     <ClCompile Include="Sampler.cpp" />
+    <ClCompile Include="ScriptCommander.cpp" />
     <ClCompile Include="SolidSphere.cpp" />
     <ClCompile Include="TestCube.cpp" />
     <ClCompile Include="TestPlane.cpp" />
@@ -237,13 +239,16 @@
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="IndexedTriangleList.h" />
     <ClInclude Include="InputLayout.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="KDException.h" />
     <ClInclude Include="KDMath.h" />
     <ClInclude Include="KDWin.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="QuoteUtil.h" />
     <ClInclude Include="Rasterizer.h" />
+    <ClInclude Include="ScriptCommander.h" />
     <ClInclude Include="TexturePreprocessor.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="Plane.h" />
@@ -497,6 +502,9 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="process.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
