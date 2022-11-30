@@ -1,11 +1,10 @@
 #include "App.h"
-#include "GDIPlusManager.h"
 #include "KDMath.h"
 #include <random>
 #include "TexturePreprocessor.h"
+#include "dxtex/DirectXTex.h"
 #include <shellapi.h>
 
-GDIPlusManager gdipm; 
 namespace dx = DirectX;
 
 App::App( const std::string& commandLine )
@@ -57,53 +56,14 @@ App::App( const std::string& commandLine )
 void App::Update()
 {
 	pl.Bind( wnd.Gfx(), cam.GetMatrix() );
-	CheckMouseInWin();
-
-	if (!wnd.CursorEnabled())
-	{
-		speedCam = wnd.kbd.KeyIsPressed(VK_SHIFT) ? 1.0f : 4.0f;
-
-		if (wnd.kbd.KeyIsPressed('W'))
-		{
-			cam.Translate({ 0.0f,0.0f,speedCam*deltaTime });
-		}
-		if (wnd.kbd.KeyIsPressed('A'))
-		{
-			cam.Translate({ speedCam*-deltaTime,0.0f,0.0f });
-		}
-		if (wnd.kbd.KeyIsPressed('S'))
-		{
-			cam.Translate({ 0.0f,0.0f,speedCam*-deltaTime });
-		}
-		if (wnd.kbd.KeyIsPressed('D'))
-		{
-			cam.Translate({ speedCam*deltaTime,0.0f,0.0f });
-		}
-		if (wnd.kbd.KeyIsPressed('R'))
-		{
-			cam.Translate({ 0.0f,speedCam*deltaTime,0.0f });
-		}
-		if (wnd.kbd.KeyIsPressed('F'))
-		{
-			cam.Translate({ 0.0f,speedCam*-deltaTime,0.0f });
-		}
-	}
-	while (const auto delta = wnd.mouse.ReadRawDelta())
-	{
-		if (!wnd.CursorEnabled())
-		{
-			cam.Rotate((float)delta->x, (float)delta->y);
-		}
-	}
+	UpdateMouse();
 }
 
 void App::DoFrame()
 {
 	pl.Draw( wnd.Gfx() );
 	sponza.Draw( wnd.Gfx() );
-	plane.Draw( wnd.Gfx() );
 
 	cam.SpawnControlWindow();
 	pl.SpawnControlWindow();
-	plane.SpawnControlWindow( wnd.Gfx() );
 }

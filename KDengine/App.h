@@ -84,6 +84,47 @@ public:
 			}
 		}
 	}
+	void UpdateMouse()
+	{
+		CheckMouseInWin();
+
+		if (!wnd.CursorEnabled())
+		{
+			speedCam = wnd.kbd.KeyIsPressed(VK_SHIFT) ? 1.0f : 4.0f;
+
+			if (wnd.kbd.KeyIsPressed('W'))
+			{
+				cam.Translate({ 0.0f,0.0f,speedCam * deltaTime });
+			}
+			if (wnd.kbd.KeyIsPressed('A'))
+			{
+				cam.Translate({ speedCam * -deltaTime,0.0f,0.0f });
+			}
+			if (wnd.kbd.KeyIsPressed('S'))
+			{
+				cam.Translate({ 0.0f,0.0f,speedCam * -deltaTime });
+			}
+			if (wnd.kbd.KeyIsPressed('D'))
+			{
+				cam.Translate({ speedCam * deltaTime,0.0f,0.0f });
+			}
+			if (wnd.kbd.KeyIsPressed('R'))
+			{
+				cam.Translate({ 0.0f,speedCam * deltaTime,0.0f });
+			}
+			if (wnd.kbd.KeyIsPressed('F'))
+			{
+				cam.Translate({ 0.0f,speedCam * -deltaTime,0.0f });
+			}
+		}
+		while (const auto delta = wnd.mouse.ReadRawDelta())
+		{
+			if (!wnd.CursorEnabled())
+			{
+				cam.Rotate((float)delta->x, (float)delta->y);
+			}
+		}
+	}
 
 private:
 	void Update();
@@ -104,5 +145,4 @@ private:
 	PointLight		pl;
 
 	Model		sponza{ wnd.Gfx(), "Models\\sponza\\sponza.obj" };
-	TestPlane	plane{ wnd.Gfx(), 6.0f, {0.3f, 0.3f, 1.0f, 1.0f} };
 };
