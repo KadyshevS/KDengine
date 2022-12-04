@@ -90,7 +90,7 @@ public:
 
 		if (!wnd.CursorEnabled())
 		{
-			speedCam = wnd.kbd.KeyIsPressed(VK_SHIFT) ? 1.0f : 4.0f;
+			speedCam = wnd.kbd.KeyIsPressed(VK_SHIFT) ? 1.0f : 2.0f;
 
 			if (wnd.kbd.KeyIsPressed('W'))
 			{

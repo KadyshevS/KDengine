@@ -153,9 +153,6 @@
     <ClCompile Include="PointLight.cpp">
       <Filter>Исходные файлы\Drawable</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Vertex.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -185,6 +182,15 @@
     </ClCompile>
     <ClCompile Include="ScriptCommander.cpp">
       <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Исходные файлы\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="LayoutCodex.cpp">
+      <Filter>Исходные файлы\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicConstant.cpp">
+      <Filter>Исходные файлы\Bindable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,9 +257,6 @@
     <ClInclude Include="TransformCbuf.h">
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
-    <ClInclude Include="ConstantBuffer.h">
-      <Filter>Файлы заголовков\Bindable</Filter>
-    </ClInclude>
     <ClInclude Include="BindableCommon.h">
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
@@ -317,9 +320,6 @@
     <ClInclude Include="Color.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
@@ -367,6 +367,21 @@
     </ClInclude>
     <ClInclude Include="Config.h">
       <Filter>Файлы заголовков\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutCodex.h">
+      <Filter>Файлы заголовков\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicConstant.h">
+      <Filter>Файлы заголовков\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBufferEx.h">
+      <Filter>Файлы заголовков\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
