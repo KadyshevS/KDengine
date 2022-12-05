@@ -383,6 +383,9 @@
     <ClInclude Include="ConstantBuffer.h">
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
+    <ClInclude Include="Stencil.h">
+      <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KDengine.rc">

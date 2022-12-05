@@ -11,11 +11,10 @@ namespace dx = DirectX;
 App::App( const std::string& commandLine )
 	:
 	commandLine( commandLine ),
+	sComm( TokenizeQuoted(commandLine) ),
 	wnd( 1280, 720, "KDEngine App" ),
-	sComm( TokenizeQuoted( commandLine ) ),
-	pl( wnd.Gfx(), 0.5f )
+	pl( wnd.Gfx(), 1.0f )
 {
-	sponza.SetRootTransform( dx::XMMatrixScaling(0.01f, 0.01f, 0.01f) );
 	wnd.Gfx().SetProjection( DirectX::XMMatrixPerspectiveLH( 1.0f, 9.0f / 16.0f, 0.5f, 400.0f ) );
 }
 
@@ -29,7 +28,14 @@ void App::DoFrame()
 {
 	pl.Draw( wnd.Gfx() );
 	sponza.Draw( wnd.Gfx() );
+	cube1.Draw( wnd.Gfx() );
+	cube2.Draw( wnd.Gfx() );
 
+	cube1.DrawOutline( wnd.Gfx() );
+	cube2.DrawOutline( wnd.Gfx() );
 	cam.SpawnControlWindow();
 	pl.SpawnControlWindow();
+	sponza.ShowWindow( wnd.Gfx(), "Crytek Sponza scene" );
+	cube1.SpawnControlWindow( wnd.Gfx(), "Cube 1" );
+	cube2.SpawnControlWindow( wnd.Gfx(), "Cube 2" );
 }

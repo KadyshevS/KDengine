@@ -6,7 +6,7 @@
 #include "PointLight.h"
 #include "Camera.h"
 #include "Mesh.h"
-#include "TestPlane.h"
+#include "TestCube.h"
 #include "ScriptCommander.h"
 #include <set>
 
@@ -38,7 +38,7 @@ public:
 			wnd.Gfx().EndFrame();
 		}
 	}
-	void SpawnSimulationWindow() noexcept
+	void ShowSimulationWindow() noexcept
 	{
 		if (ImGui::Begin("Simulation Speed"))
 		{
@@ -145,5 +145,7 @@ private:
 	Camera			cam;
 	PointLight		pl;
 
-	Model		sponza{ wnd.Gfx(), "Models\\sponza\\sponza.obj" };
+	Model		sponza{ wnd.Gfx(), "Models\\sponza\\sponza.obj", 1.0f / 20.f };
+	TestCube	cube1{ wnd.Gfx(), 1.0f };
+	TestCube	cube2{ wnd.Gfx(), 1.0f };
 };

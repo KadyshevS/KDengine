@@ -65,8 +65,13 @@ public:
 	void SetRootTransform( DirectX::FXMMATRIX tf ) noexcept;
 	~Model() noexcept;
 private:
+	bool outlining = false;
+	std::vector<std::shared_ptr<Bind::Bindable>> outlineEffect;
+
+private:
 	static std::unique_ptr<Mesh> ParseMesh( Graphics& gfx,const aiMesh& mesh,const aiMaterial* const* pMaterials,const std::filesystem::path& path,float scale );
 	std::unique_ptr<Node> ParseNode( int& nextId,const aiNode& node ) noexcept;
+
 private:
 	std::unique_ptr<Node> pRoot;
 	std::vector<std::unique_ptr<Mesh>> meshPtrs;
