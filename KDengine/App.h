@@ -91,9 +91,9 @@ public:
 	{
 		CheckMouseInWin();
 
-		if (!wnd.CursorEnabled())
+		if ( !wnd.CursorEnabled() )
 		{
-			speedCam = wnd.kbd.KeyIsPressed(VK_SHIFT) ? 1.0f : 2.0f;
+			speedCam = wnd.kbd.KeyIsPressed(VK_SHIFT) ? 1.0f : 1.5f;
 
 			if (wnd.kbd.KeyIsPressed('W'))
 			{
@@ -120,7 +120,7 @@ public:
 				cam.Translate({ 0.0f,speedCam * -deltaTime,0.0f });
 			}
 		}
-		while (const auto delta = wnd.mouse.ReadRawDelta())
+		while ( const auto delta = wnd.mouse.ReadRawDelta() )
 		{
 			if (!wnd.CursorEnabled())
 			{
@@ -150,6 +150,6 @@ private:
 	PointLight		pl;
 
 //	Model		sponza{ wnd.Gfx(), "Models\\sponza\\sponza.obj", 1.0f / 20.f };
-	TestCube	cube1{ wnd.Gfx(), 1.0f };
-	TestCube	cube2{ wnd.Gfx(), 1.0f };
+	TestCube	cube1{ wnd.Gfx(), 2.0f };
+	TestCube	cube2{ wnd.Gfx(), 2.0f };
 };

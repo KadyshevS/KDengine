@@ -428,6 +428,12 @@
     <ClInclude Include="PerfLog.h">
       <Filter>Файлы заголовков\Commander</Filter>
     </ClInclude>
+    <ClInclude Include="TechniqueProbe.h">
+      <Filter>Файлы заголовков\Commander</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KDengine.rc">
