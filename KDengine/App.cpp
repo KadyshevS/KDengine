@@ -23,15 +23,16 @@ App::App( const std::string& commandLine )
 void App::Update()
 {
 	pl.Bind( wnd.Gfx(), cam.GetMatrix() );
-	pl.Submit( fComm );
-	cube1.Submit( fComm );
-	cube2.Submit( fComm );
 
 	UpdateMouse();
 }
 
 void App::DoFrame()
 {
+	pl.Submit( fComm );
+	cube1.Submit( fComm );
+	cube2.Submit( fComm );
+
 	cam.SpawnControlWindow();
 	pl.SpawnControlWindow();
 //	sponza.ShowWindow( wnd.Gfx(), "Crytek Sponza scene" );

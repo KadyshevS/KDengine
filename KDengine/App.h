@@ -33,10 +33,10 @@ public:
 			wnd.Gfx().SetCamera( cam.GetMatrix() );
 		//	Updating game logic
 			Update();
-			fComm.Execute( wnd.Gfx() );
 		//	Draw
 			wnd.Gfx().BeginFrame( 0.0f, 0.0f, 0.3f );
 			DoFrame();
+			fComm.Execute( wnd.Gfx() );
 			wnd.Gfx().EndFrame();
 			fComm.Reset();
 		}
