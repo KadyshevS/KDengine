@@ -425,6 +425,9 @@
     <ClInclude Include="NullPixelShader.h">
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
+    <ClInclude Include="PerfLog.h">
+      <Filter>Файлы заголовков\Commander</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KDengine.rc">
