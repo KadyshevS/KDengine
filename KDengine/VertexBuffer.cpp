@@ -10,7 +10,8 @@ namespace Bind
 	VertexBuffer::VertexBuffer( Graphics& gfx,const std::string& tag,const Dvtx::VertexBuffer& vbuf )
 		:
 		stride( (UINT)vbuf.GetLayout().Size() ),
-		tag( tag )
+		tag( tag ),
+		layout( vbuf.GetLayout() )
 	{
 		INFOMAN( gfx );
 
@@ -26,6 +27,10 @@ namespace Bind
 		GFX_THROW_INFO( GetDevice( gfx )->CreateBuffer( &bd,&sd,&pVertexBuffer ) );
 	}
 
+	const Dvtx::VertexLayout& VertexBuffer::GetLayout() const noexcept
+	{
+		return layout;
+	}
 	void VertexBuffer::Bind( Graphics& gfx ) noexcept
 	{
 		const UINT offset = 0u;

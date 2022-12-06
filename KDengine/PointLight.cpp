@@ -1,5 +1,6 @@
- #include "PointLight.h"
+#include "PointLight.h"
 #include "imgui.h"
+#include "FrameCommander.h"
 
 PointLight::PointLight( Graphics& gfx, float radius )
 	:
@@ -39,9 +40,9 @@ void PointLight::SpawnControlWindow() noexcept
 void PointLight::Reset() noexcept
 {
 	cbData = {
-		{ -4.0f,  4.6f, 0.6f },
-		{ 0.21f, 0.21f, 0.35f },
-		{ 1.0f , 1.0f,   1.0f },
+		{ -4.0f,4.6f,0.6f },
+		{ 0.21f,0.21f,0.35f },
+		{ 1.0f,1.0f,1.0f },
 		1.0f,
 		1.0f,
 		0.045f,
@@ -49,10 +50,10 @@ void PointLight::Reset() noexcept
 	};
 }
 
-void PointLight::Draw( Graphics& gfx ) const noexcept(!IS_DEBUG)
+void PointLight::Submit(FrameCommander& frame) const noexcept(!IS_DEBUG)
 {
 	mesh.SetPos( cbData.pos );
-	mesh.Draw( gfx );
+	mesh.Submit( frame );
 }
 
 void PointLight::Bind( Graphics& gfx, DirectX::FXMMATRIX view ) const noexcept

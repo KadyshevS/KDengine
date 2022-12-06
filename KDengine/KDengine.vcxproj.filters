@@ -31,14 +31,8 @@
     <Filter Include="Файлы заголовков\Drawable">
       <UniqueIdentifier>{e0a99bb2-87b0-47f5-8d8d-cf17a3185345}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\imgui">
-      <UniqueIdentifier>{710b0d93-1340-4b59-9c40-44421b4f3d4d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\imgui">
       <UniqueIdentifier>{5fb61005-7ded-48d4-b535-9abc5bcfd5c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\Geometric privitives">
-      <UniqueIdentifier>{c91139b6-42cb-4157-8ade-b661de16efda}</UniqueIdentifier>
     </Filter>
     <Filter Include="Шейдеры\PS">
       <UniqueIdentifier>{048eb44a-74e9-421e-8bea-667d5a4550a8}</UniqueIdentifier>
@@ -51,6 +45,21 @@
     </Filter>
     <Filter Include="Прочее">
       <UniqueIdentifier>{a108f43d-6473-4fc5-b81b-85a59d97190b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Commander">
+      <UniqueIdentifier>{9d82ab3c-2436-4658-8442-330e812d6b96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Geometry">
+      <UniqueIdentifier>{c91139b6-42cb-4157-8ade-b661de16efda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Imgui">
+      <UniqueIdentifier>{710b0d93-1340-4b59-9c40-44421b4f3d4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Commander">
+      <UniqueIdentifier>{814f1756-11ff-433a-8d6c-f09194bd520e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\DynamicConstant">
+      <UniqueIdentifier>{95f15705-a728-4cf3-bc71-0b370e0c4c12}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +201,18 @@
     <ClCompile Include="DynamicConstant.cpp">
       <Filter>Исходные файлы\Bindable</Filter>
     </ClCompile>
+    <ClCompile Include="Job.cpp">
+      <Filter>Исходные файлы\Commander</Filter>
+    </ClCompile>
+    <ClCompile Include="Techinque.cpp">
+      <Filter>Исходные файлы\Commander</Filter>
+    </ClCompile>
+    <ClCompile Include="Step.cpp">
+      <Filter>Исходные файлы\Commander</Filter>
+    </ClCompile>
+    <ClCompile Include="NullPixelShader.cpp">
+      <Filter>Исходные файлы\Bindable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -279,28 +300,28 @@
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imconfig.h">
-      <Filter>Файлы заголовков\imgui</Filter>
+      <Filter>Файлы заголовков\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imgui.h">
-      <Filter>Файлы заголовков\imgui</Filter>
+      <Filter>Файлы заголовков\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imgui_impl_dx11.h">
-      <Filter>Файлы заголовков\imgui</Filter>
+      <Filter>Файлы заголовков\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imgui_impl_win32.h">
-      <Filter>Файлы заголовков\imgui</Filter>
+      <Filter>Файлы заголовков\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imgui_internal.h">
-      <Filter>Файлы заголовков\imgui</Filter>
+      <Filter>Файлы заголовков\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imstb_rectpack.h">
-      <Filter>Файлы заголовков\imgui</Filter>
+      <Filter>Файлы заголовков\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imstb_textedit.h">
-      <Filter>Файлы заголовков\imgui</Filter>
+      <Filter>Файлы заголовков\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imstb_truetype.h">
-      <Filter>Файлы заголовков\imgui</Filter>
+      <Filter>Файлы заголовков\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="ImguiManager.h">
       <Filter>Файлы заголовков</Filter>
@@ -336,10 +357,10 @@
       <Filter>Файлы заголовков\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="Cube.h">
-      <Filter>Файлы заголовков\Geometric privitives</Filter>
+      <Filter>Файлы заголовков\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Plane.h">
-      <Filter>Файлы заголовков\Geometric privitives</Filter>
+      <Filter>Файлы заголовков\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Файлы ресурсов</Filter>
@@ -371,12 +392,6 @@
     <ClInclude Include="Mesh.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="LayoutCodex.h">
-      <Filter>Файлы заголовков\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="DynamicConstant.h">
-      <Filter>Файлы заголовков\Bindable</Filter>
-    </ClInclude>
     <ClInclude Include="ConstantBufferEx.h">
       <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
@@ -385,6 +400,30 @@
     </ClInclude>
     <ClInclude Include="Stencil.h">
       <Filter>Файлы заголовков\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameCommander.h">
+      <Filter>Файлы заголовков\Commander</Filter>
+    </ClInclude>
+    <ClInclude Include="Job.h">
+      <Filter>Файлы заголовков\Commander</Filter>
+    </ClInclude>
+    <ClInclude Include="Step.h">
+      <Filter>Файлы заголовков\Commander</Filter>
+    </ClInclude>
+    <ClInclude Include="Technique.h">
+      <Filter>Файлы заголовков\Commander</Filter>
+    </ClInclude>
+    <ClInclude Include="Pass.h">
+      <Filter>Файлы заголовков\Commander</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicConstant.h">
+      <Filter>Файлы заголовков\DynamicConstant</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutCodex.h">
+      <Filter>Файлы заголовков\DynamicConstant</Filter>
+    </ClInclude>
+    <ClInclude Include="NullPixelShader.h">
+      <Filter>Файлы заголовков\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@
 #include "Mesh.h"
 #include "TestCube.h"
 #include "ScriptCommander.h"
+#include "FrameCommander.h"
 #include <set>
 
 class App
@@ -32,10 +33,12 @@ public:
 			wnd.Gfx().SetCamera( cam.GetMatrix() );
 		//	Updating game logic
 			Update();
+			fComm.Execute( wnd.Gfx() );
 		//	Draw
 			wnd.Gfx().BeginFrame( 0.0f, 0.0f, 0.3f );
 			DoFrame();
 			wnd.Gfx().EndFrame();
+			fComm.Reset();
 		}
 	}
 	void ShowSimulationWindow() noexcept
@@ -140,12 +143,13 @@ private:
 	std::string		commandLine;
 	ImguiManager	imgui;
 	ScriptCommander sComm;
+	FrameCommander	fComm;
 	Window			wnd;
 	FrameTimer		timer;
 	Camera			cam;
 	PointLight		pl;
 
-	Model		sponza{ wnd.Gfx(), "Models\\sponza\\sponza.obj", 1.0f / 20.f };
+//	Model		sponza{ wnd.Gfx(), "Models\\sponza\\sponza.obj", 1.0f / 20.f };
 	TestCube	cube1{ wnd.Gfx(), 1.0f };
 	TestCube	cube2{ wnd.Gfx(), 1.0f };
 };

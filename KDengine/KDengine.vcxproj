@@ -168,6 +168,7 @@
     <ClCompile Include="Bindable.cpp" />
     <ClCompile Include="Blender.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Job.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="DxErr.cpp" />
     <ClCompile Include="DxgiInfoManager.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="LayoutCodex.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="NullPixelShader.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="QuoteUtil.cpp" />
@@ -196,6 +198,8 @@
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="ScriptCommander.cpp" />
     <ClCompile Include="SolidSphere.cpp" />
+    <ClCompile Include="Step.cpp" />
+    <ClCompile Include="Techinque.cpp" />
     <ClCompile Include="TestCube.cpp" />
     <ClCompile Include="TestPlane.cpp" />
     <ClCompile Include="Surface.cpp" />
@@ -219,6 +223,7 @@
     <ClInclude Include="Blender.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Job.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="ConstantBufferEx.h" />
     <ClInclude Include="Cube.h" />
@@ -227,6 +232,7 @@
     <ClInclude Include="DxgiInfoManager.h" />
     <ClInclude Include="DynamicConstant.h" />
     <ClInclude Include="ExtendedXM.h" />
+    <ClInclude Include="FrameCommander.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="GfxExcept.h" />
     <ClInclude Include="Config.h" />
@@ -251,10 +257,14 @@
     <ClInclude Include="LayoutCodex.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mouse.h" />
+    <ClInclude Include="NullPixelShader.h" />
+    <ClInclude Include="Pass.h" />
     <ClInclude Include="QuoteUtil.h" />
     <ClInclude Include="Rasterizer.h" />
     <ClInclude Include="ScriptCommander.h" />
     <ClInclude Include="Stencil.h" />
+    <ClInclude Include="Step.h" />
+    <ClInclude Include="Technique.h" />
     <ClInclude Include="TexturePreprocessor.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="Plane.h" />
